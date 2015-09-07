@@ -70,6 +70,16 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 .PHONY : rebuild_cache/fast
 
+# Special rule for the target test
+test:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Running tests..."
+	/usr/bin/ctest --force-new-ctest-process $(ARGS)
+.PHONY : test
+
+# Special rule for the target test
+test/fast: test
+.PHONY : test/fast
+
 # The main all target
 all: cmake_check_build_system
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles /home/kevin/Documents/CS585/build/CMakeFiles/progress.marks
@@ -114,6 +124,19 @@ CS585/fast:
 	$(MAKE) -f CMakeFiles/CS585.dir/build.make CMakeFiles/CS585.dir/build
 .PHONY : CS585/fast
 
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
 home/kevin/Documents/CS585/game.m.o: home/kevin/Documents/CS585/game.m.cpp.o
 .PHONY : home/kevin/Documents/CS585/game.m.o
 
@@ -138,6 +161,30 @@ home/kevin/Documents/CS585/game.m.cpp.s:
 	$(MAKE) -f CMakeFiles/CS585.dir/build.make CMakeFiles/CS585.dir/home/kevin/Documents/CS585/game.m.cpp.s
 .PHONY : home/kevin/Documents/CS585/game.m.cpp.s
 
+home/kevin/Documents/CS585/gtest.o: home/kevin/Documents/CS585/gtest.cpp.o
+.PHONY : home/kevin/Documents/CS585/gtest.o
+
+# target to build an object file
+home/kevin/Documents/CS585/gtest.cpp.o:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/gtest.cpp.o
+.PHONY : home/kevin/Documents/CS585/gtest.cpp.o
+
+home/kevin/Documents/CS585/gtest.i: home/kevin/Documents/CS585/gtest.cpp.i
+.PHONY : home/kevin/Documents/CS585/gtest.i
+
+# target to preprocess a source file
+home/kevin/Documents/CS585/gtest.cpp.i:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/gtest.cpp.i
+.PHONY : home/kevin/Documents/CS585/gtest.cpp.i
+
+home/kevin/Documents/CS585/gtest.s: home/kevin/Documents/CS585/gtest.cpp.s
+.PHONY : home/kevin/Documents/CS585/gtest.s
+
+# target to generate assembly for a file
+home/kevin/Documents/CS585/gtest.cpp.s:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/gtest.cpp.s
+.PHONY : home/kevin/Documents/CS585/gtest.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -146,10 +193,15 @@ help:
 	@echo "... depend"
 	@echo "... CS585"
 	@echo "... edit_cache"
+	@echo "... gtest"
 	@echo "... rebuild_cache"
+	@echo "... test"
 	@echo "... home/kevin/Documents/CS585/game.m.o"
 	@echo "... home/kevin/Documents/CS585/game.m.i"
 	@echo "... home/kevin/Documents/CS585/game.m.s"
+	@echo "... home/kevin/Documents/CS585/gtest.o"
+	@echo "... home/kevin/Documents/CS585/gtest.i"
+	@echo "... home/kevin/Documents/CS585/gtest.s"
 .PHONY : help
 
 
