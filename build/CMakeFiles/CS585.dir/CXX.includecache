@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/kevin/Documents/CS585/game.m.cpp
+src/game.h
+/home/kevin/Documents/CS585/src/game.h
+iostream
+-
+
+/home/kevin/Documents/CS585/src/game.h
+

@@ -1,0 +1,1 @@
+/usr/bin/c++       CMakeFiles/CS585.dir/home/kevin/Documents/CS585/game.m.cpp.o  -o CS585 -rdynamic 
