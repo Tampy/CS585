@@ -6,15 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/kevin/Documents/CS585/game.m.cpp
-src/game.h
-/home/kevin/Documents/CS585/src/game.h
+/home/kevin/Documents/CS585/game.h
 cmath
--
-iostream
 -
 
-/home/kevin/Documents/CS585/src/game.h
-cmath
+/home/kevin/Documents/CS585/game.m.cpp
+game.h
+/home/kevin/Documents/CS585/game.h
+iostream
 -
+src/testing/square.h
+/home/kevin/Documents/CS585/src/testing/square.h
+
+/home/kevin/Documents/CS585/src/testing/square.h
 

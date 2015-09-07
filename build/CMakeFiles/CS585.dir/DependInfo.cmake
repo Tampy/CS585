@@ -10,6 +10,7 @@ SET(CMAKE_CXX_COMPILER_ID "GNU")
 
 # Targets to which this target links.
 SET(CMAKE_TARGET_LINKED_INFO_FILES
+  "/home/kevin/Documents/CS585/build/CMakeFiles/square.dir/DependInfo.cmake"
   )
 
 # The include file search paths:

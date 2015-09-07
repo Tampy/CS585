@@ -137,6 +137,19 @@ gtest/fast:
 	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/build
 .PHONY : gtest/fast
 
+#=============================================================================
+# Target rules for targets named square
+
+# Build rule for target.
+square: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 square
+.PHONY : square
+
+# fast build rule for target.
+square/fast:
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/build
+.PHONY : square/fast
+
 home/kevin/Documents/CS585/game.m.o: home/kevin/Documents/CS585/game.m.cpp.o
 .PHONY : home/kevin/Documents/CS585/game.m.o
 
@@ -161,29 +174,53 @@ home/kevin/Documents/CS585/game.m.cpp.s:
 	$(MAKE) -f CMakeFiles/CS585.dir/build.make CMakeFiles/CS585.dir/home/kevin/Documents/CS585/game.m.cpp.s
 .PHONY : home/kevin/Documents/CS585/game.m.cpp.s
 
-home/kevin/Documents/CS585/gtest.o: home/kevin/Documents/CS585/gtest.cpp.o
-.PHONY : home/kevin/Documents/CS585/gtest.o
+home/kevin/Documents/CS585/src/testing/gtest.o: home/kevin/Documents/CS585/src/testing/gtest.cpp.o
+.PHONY : home/kevin/Documents/CS585/src/testing/gtest.o
 
 # target to build an object file
-home/kevin/Documents/CS585/gtest.cpp.o:
-	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/gtest.cpp.o
-.PHONY : home/kevin/Documents/CS585/gtest.cpp.o
+home/kevin/Documents/CS585/src/testing/gtest.cpp.o:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/src/testing/gtest.cpp.o
+.PHONY : home/kevin/Documents/CS585/src/testing/gtest.cpp.o
 
-home/kevin/Documents/CS585/gtest.i: home/kevin/Documents/CS585/gtest.cpp.i
-.PHONY : home/kevin/Documents/CS585/gtest.i
+home/kevin/Documents/CS585/src/testing/gtest.i: home/kevin/Documents/CS585/src/testing/gtest.cpp.i
+.PHONY : home/kevin/Documents/CS585/src/testing/gtest.i
 
 # target to preprocess a source file
-home/kevin/Documents/CS585/gtest.cpp.i:
-	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/gtest.cpp.i
-.PHONY : home/kevin/Documents/CS585/gtest.cpp.i
+home/kevin/Documents/CS585/src/testing/gtest.cpp.i:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/src/testing/gtest.cpp.i
+.PHONY : home/kevin/Documents/CS585/src/testing/gtest.cpp.i
 
-home/kevin/Documents/CS585/gtest.s: home/kevin/Documents/CS585/gtest.cpp.s
-.PHONY : home/kevin/Documents/CS585/gtest.s
+home/kevin/Documents/CS585/src/testing/gtest.s: home/kevin/Documents/CS585/src/testing/gtest.cpp.s
+.PHONY : home/kevin/Documents/CS585/src/testing/gtest.s
 
 # target to generate assembly for a file
-home/kevin/Documents/CS585/gtest.cpp.s:
-	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/gtest.cpp.s
-.PHONY : home/kevin/Documents/CS585/gtest.cpp.s
+home/kevin/Documents/CS585/src/testing/gtest.cpp.s:
+	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/home/kevin/Documents/CS585/src/testing/gtest.cpp.s
+.PHONY : home/kevin/Documents/CS585/src/testing/gtest.cpp.s
+
+home/kevin/Documents/CS585/src/testing/square.o: home/kevin/Documents/CS585/src/testing/square.cpp.o
+.PHONY : home/kevin/Documents/CS585/src/testing/square.o
+
+# target to build an object file
+home/kevin/Documents/CS585/src/testing/square.cpp.o:
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/home/kevin/Documents/CS585/src/testing/square.cpp.o
+.PHONY : home/kevin/Documents/CS585/src/testing/square.cpp.o
+
+home/kevin/Documents/CS585/src/testing/square.i: home/kevin/Documents/CS585/src/testing/square.cpp.i
+.PHONY : home/kevin/Documents/CS585/src/testing/square.i
+
+# target to preprocess a source file
+home/kevin/Documents/CS585/src/testing/square.cpp.i:
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/home/kevin/Documents/CS585/src/testing/square.cpp.i
+.PHONY : home/kevin/Documents/CS585/src/testing/square.cpp.i
+
+home/kevin/Documents/CS585/src/testing/square.s: home/kevin/Documents/CS585/src/testing/square.cpp.s
+.PHONY : home/kevin/Documents/CS585/src/testing/square.s
+
+# target to generate assembly for a file
+home/kevin/Documents/CS585/src/testing/square.cpp.s:
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/home/kevin/Documents/CS585/src/testing/square.cpp.s
+.PHONY : home/kevin/Documents/CS585/src/testing/square.cpp.s
 
 # Help Target
 help:
@@ -195,13 +232,17 @@ help:
 	@echo "... edit_cache"
 	@echo "... gtest"
 	@echo "... rebuild_cache"
+	@echo "... square"
 	@echo "... test"
 	@echo "... home/kevin/Documents/CS585/game.m.o"
 	@echo "... home/kevin/Documents/CS585/game.m.i"
 	@echo "... home/kevin/Documents/CS585/game.m.s"
-	@echo "... home/kevin/Documents/CS585/gtest.o"
-	@echo "... home/kevin/Documents/CS585/gtest.i"
-	@echo "... home/kevin/Documents/CS585/gtest.s"
+	@echo "... home/kevin/Documents/CS585/src/testing/gtest.o"
+	@echo "... home/kevin/Documents/CS585/src/testing/gtest.i"
+	@echo "... home/kevin/Documents/CS585/src/testing/gtest.s"
+	@echo "... home/kevin/Documents/CS585/src/testing/square.o"
+	@echo "... home/kevin/Documents/CS585/src/testing/square.i"
+	@echo "... home/kevin/Documents/CS585/src/testing/square.s"
 .PHONY : help
 
 

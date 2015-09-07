@@ -222,6 +222,12 @@ gtest_force_shared_crt:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
+//Dependencies for target
+main_LIB_DEPENDS:STATIC=
+
+//Dependencies for target
+square_LIB_DEPENDS:STATIC=
+
 
 ########################
 # INTERNAL cache entries

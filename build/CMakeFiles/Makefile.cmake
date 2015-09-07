@@ -49,4 +49,5 @@ SET(CMAKE_MAKEFILE_PRODUCTS
 SET(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/CS585.dir/DependInfo.cmake"
   "CMakeFiles/gtest.dir/DependInfo.cmake"
+  "CMakeFiles/square.dir/DependInfo.cmake"
   )

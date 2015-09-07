@@ -59,7 +59,7 @@ CMAKE_BINARY_DIR = /home/kevin/Documents/CS585/build
 # Target rules for target CMakeFiles/CS585.dir
 
 # All Build rule for target.
-CMakeFiles/CS585.dir/all:
+CMakeFiles/CS585.dir/all: CMakeFiles/square.dir/all
 	$(MAKE) -f CMakeFiles/CS585.dir/build.make CMakeFiles/CS585.dir/depend
 	$(MAKE) -f CMakeFiles/CS585.dir/build.make CMakeFiles/CS585.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS585/build/CMakeFiles  1
@@ -72,7 +72,7 @@ all: CMakeFiles/CS585.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/CS585.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/CS585.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 0
 .PHONY : CMakeFiles/CS585.dir/rule
@@ -94,7 +94,7 @@ clean: CMakeFiles/CS585.dir/clean
 # Target rules for target CMakeFiles/gtest.dir
 
 # All Build rule for target.
-CMakeFiles/gtest.dir/all:
+CMakeFiles/gtest.dir/all: CMakeFiles/square.dir/all
 	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/depend
 	$(MAKE) -f CMakeFiles/gtest.dir/build.make CMakeFiles/gtest.dir/build
 	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS585/build/CMakeFiles  2
@@ -107,7 +107,7 @@ all: CMakeFiles/gtest.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/gtest.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 1
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 2
 	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/gtest.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 0
 .PHONY : CMakeFiles/gtest.dir/rule
@@ -123,6 +123,41 @@ CMakeFiles/gtest.dir/clean:
 
 # clean rule for target.
 clean: CMakeFiles/gtest.dir/clean
+.PHONY : clean
+
+#=============================================================================
+# Target rules for target CMakeFiles/square.dir
+
+# All Build rule for target.
+CMakeFiles/square.dir/all:
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/depend
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/build
+	$(CMAKE_COMMAND) -E cmake_progress_report /home/kevin/Documents/CS585/build/CMakeFiles  3
+	@echo "Built target square"
+.PHONY : CMakeFiles/square.dir/all
+
+# Include target in all.
+all: CMakeFiles/square.dir/all
+.PHONY : all
+
+# Build rule for subdir invocation for target.
+CMakeFiles/square.dir/rule: cmake_check_build_system
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 1
+	$(MAKE) -f CMakeFiles/Makefile2 CMakeFiles/square.dir/all
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/kevin/Documents/CS585/build/CMakeFiles 0
+.PHONY : CMakeFiles/square.dir/rule
+
+# Convenience name for target.
+square: CMakeFiles/square.dir/rule
+.PHONY : square
+
+# clean rule for target.
+CMakeFiles/square.dir/clean:
+	$(MAKE) -f CMakeFiles/square.dir/build.make CMakeFiles/square.dir/clean
+.PHONY : CMakeFiles/square.dir/clean
+
+# clean rule for target.
+clean: CMakeFiles/square.dir/clean
 .PHONY : clean
 
 #=============================================================================

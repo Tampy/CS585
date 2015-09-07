@@ -84,6 +84,7 @@ CS585_EXTERNAL_OBJECTS =
 
 CS585: CMakeFiles/CS585.dir/home/kevin/Documents/CS585/game.m.cpp.o
 CS585: CMakeFiles/CS585.dir/build.make
+CS585: libsquare.a
 CS585: CMakeFiles/CS585.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --red --bold "Linking CXX executable CS585"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/CS585.dir/link.txt --verbose=$(VERBOSE)
