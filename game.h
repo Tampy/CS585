@@ -10,6 +10,7 @@ namespace StevensDev
 
 }
 
-int main(int, char**);
+int main( int, char** );
+  // Runs a print statement and returns.
 
 #endif

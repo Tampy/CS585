@@ -67,4 +67,6 @@ All conditional blocks (if, for, while, etc.) must use curly braces
 Personal Standard
 ------------------
 Curly braces are not placed on their own line but on the same line the block is called.
-Blocks are always indented one tab.
+Blocks are always indented one "tab" (4 spaces).
+For loops must not have any variables declared within their parenthesis.
+Getters and setters should be used to manipulate variables from the outside
