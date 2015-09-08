@@ -69,4 +69,5 @@ Personal Standard
 Curly braces are not placed on their own line but on the same line the block is called.
 Blocks are always indented one "tab" (4 spaces).
 For loops must not have any variables declared within their parenthesis.
-Getters and setters should be used to manipulate variables from the outside
+Getters and setters should be used to manipulate variables from the outside.
+Don't commit binary files.
