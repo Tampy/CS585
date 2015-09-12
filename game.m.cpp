@@ -2,7 +2,6 @@
 
 #include "game.h"
 #include <iostream>
-#include "src/testing/square.h"
 
 int main( int argc, char *argv[] ) {
     using namespace StevensDev;
