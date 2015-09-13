@@ -3,7 +3,6 @@ project (CS585)
 
 # GTest
 enable_testing()
-find_package(GTest REQUIRED)
 find_package(Threads REQUIRED)
 include_directories(${GTEST_INCLUDE_DIRS} .)
 link_directories(/src/ext)
