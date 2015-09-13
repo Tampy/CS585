@@ -4,8 +4,9 @@ project (CS585)
 # GTest
 enable_testing()
 find_package(Threads REQUIRED)
-include_directories(. /src/ext /src/ext/gtest-1.7.0/include)
+include_directories(. /src/ext)
 link_directories(/src/ext)
+add_subdirectory(src/ext/gtest-1.7.0)
 
 # version number
 set (cs585_VERSION_MAJOR 1)
@@ -13,8 +14,6 @@ set (cs585_VERSION_MINOR 0)
 set (QTCP_PROJECT_DIR ${.})
 
 add_executable(CS585 game.m.cpp)
-add_executable(gtest src/testing/gtest.cpp)
-target_link_libraries(gtest libgtest.a)
-target_link_libraries(gtest libgtest_main.a)
-target_link_libraries(gtest ${CMAKE_THREAD_LIBS_INIT})
+add_executable(gtest_CS585 src/testing/gtest.cpp)
+target_link_libraries(gtest_CS585 gtest ${CMAKE_THREAD_LIBS_INIT})
 add_test(AllTests gtest)
