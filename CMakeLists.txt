@@ -4,7 +4,7 @@ project (CS585)
 # GTest
 enable_testing()
 find_package(Threads REQUIRED)
-include_directories(. /src/ext /src/ext/gtest-1.7.0/include)
+include_directories(src/ext/gtest-1.7.0/include)
 link_directories(/src/ext)
 add_subdirectory(src/ext/gtest-1.7.0)
 
