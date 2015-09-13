@@ -4,7 +4,7 @@ project (CS585)
 # GTest
 enable_testing()
 find_package(Threads REQUIRED)
-include_directories(${GTEST_INCLUDE_DIRS} .)
+include_directories(${GTEST_INCLUDE_DIRS} . /src/ext)
 link_directories(/src/ext)
 
 # version number
