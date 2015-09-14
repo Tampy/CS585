@@ -13,8 +13,19 @@ template<typename T> class DynamicArray {
   private:
     IAllocator<T> arrayAlloc;
   public:
+      // CONSTRUCTORS //
+    DynamicArray();
+      // default constructor
     DynamicArray( IAllocator<T>* alloc );
       // pointer to an allocator for use with memory
+    DynamicArray( DynamicArray alloc );
+      // copy constructor
+    ~DynamicArray();
+      // desturctor
+      // FREE OPERATORS //
+    DynamicArray &operator = ( const &DynamicArray );
+      // assignment operator
+      // MUTATORS //
     void push( const T& element );
       // adds element to end of collection, grow
     void pushFront( T element);
@@ -23,6 +34,11 @@ template<typename T> class DynamicArray {
       // removes and retrieves the last element, shifts
     T popFront();
       // removes and retrieves the first element, shifts
+    T removeAt( unsigned int index );
+      // removes, throws if invalid, shifts
+    T insertAt( unsigned int index );
+      // can grow, shifts
+      // ACCESSORS //
     unsigned int const getLength();
       // number of elements contained
     T const at( unsigned int index );
@@ -31,10 +47,6 @@ template<typename T> class DynamicArray {
       // sets an element, undefined behavior if out of bounds
     T const operator [] ( int index );
       // retrieves an element, undefined behavior if out of bounds
-    T removeAt( unsigned int index );
-      // removes, throws if invalid, shifts
-    T insertAt( unsigned int index );
-      // can grow, shifts
 };
 
 #endif

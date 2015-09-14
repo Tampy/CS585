@@ -18,7 +18,17 @@ class CountingAllocator : public DefaultAllocator<T> {
     static int totalAlloc;
     static int totalRelease;
   public:
+      // CONSTRUCTORS //
     CountingAllocator();
+      // default constructors
+    CountingAllocator( CountingAllocator alloc );
+      // copy constructor
+    ~CountingAllocator();
+      // destructor
+      // FREE OPERATIONS //
+    CountingAllocator &operator = ( const &CountingAllocator );
+      // assignment operator
+      // ACCESSORS //
     int const getAllocationCount();
       // number of allocations that occurred
     int const getReleaseCount();

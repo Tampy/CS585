@@ -2,6 +2,26 @@
 
 #include "counting_allocator.h"
 
+CountingAllocator::CountingAllocator() {
+    allocCount = 0;
+    releaseCount = 0;
+}
+
+CountingAllocator::CountingAllocator( CountingAllocator alloc ) {
+    allocCount = alloc.getAllocationCount();
+    releaseCount = alloc.getReleaseCount();
+}
+
+CountingAllocator::~CountingAllocator() {
+
+}
+
+CountingAllocator &operator = ( const CountingAllocator &alloc ) {
+    allocCount = &alloc.getAllocationCount();
+    releaseCount = &alloc.getReleaseCount();
+    delete alloc;
+}
+
 int const CountingAllocator::getAllocationCount() {
     return allocCount;
 }

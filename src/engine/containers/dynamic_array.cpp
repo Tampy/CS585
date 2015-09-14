@@ -1,48 +1,70 @@
 // dynamic_array.cpp
 
 #include "dynamic_array.h"
+#include <default_allocator.h>
 
 template<typename T> class DynamicArray {
-    DynamicArray( IAllocator* alloc ) {
+    DynamicArray::DynamicArray() {
+        arrayAlloc = DefaultAllocator();
+    }
+
+    DynamicArray::DynamicArray( IAllocator* alloc ) {
         *arrayAlloc = alloc;
     }
 
-    void push( const T& element ) {
+    DynamicArray::DynamicArray( DynamicArray array ) {
+        arrayAlloc = DefaultAllocator();
+        int i = 0;
+        for( i = 0; i < array.getLength(); i++ ) {
+            push( array[i] );
+        }
+    }
+
+    DynamicArray DynamicArray::&operator = ( const DynamicArray &array ) {
+        arrayAlloc = DefaultAllocator();
+        int i = 0;
+        for( i = 0; i < &array.getLength(); i++ ) {
+            push( &array[i] );
+        }
+        delete(array);
+    }
+
+    void DynamicArray::push( const T& element ) {
         arrayAlloc.get(*T.size());
     }
 
-    void pushFront( T element) {
+    void DynamicArray::pushFront( T element) {
 
     }
 
-    T pop() {
+    T DynamicArray::pop() {
 
     }
 
-    T popFront() {
+    T DynamicArray::popFront() {
 
     }
 
-    unsigned int const getLength() {
+    unsigned int const DynamicArray::getLength() {
 
     }
 
-    T const at( unsigned int index ) {
+    T const DynamicArray::at( unsigned int index ) {
 
     }
 
-    T operator [] ( int ) {
+    T DynamicArray::operator [] ( int ) {
 
     }
-    T const operator [] ( int ) {
-
-    }
-
-    T removeAt( unsigned int index ) {
+    T const DynamicArray::operator [] ( int ) {
 
     }
 
-    T insertAt( unsigned int index ) {
+    T DynamicArray::removeAt( unsigned int index ) {
+
+    }
+
+    T DynamicArray::insertAt( unsigned int index ) {
 
     }
 };

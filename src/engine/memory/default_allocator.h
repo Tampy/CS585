@@ -13,7 +13,16 @@ class DefaultAllocator;
 template<class T>
 class DefaultAllocator : public IAllocator {
   public:
+      // CONSTRUCTORS //
     DefaultAllocator();
+      // default constructor
+    DefaultAllocator( DefaultAllocator alloc );
+      // copy constructor
+    ~DefaultAllocator();
+      // destructor
+      // FREE OPERATIONS //
+    DefaultAllocator operator = ( const DefaultAllocator );
+     // MEMBER FUNCTIONS //
     T* get( int count );
     void release( T*, int count );
 };
