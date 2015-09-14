@@ -5,7 +5,8 @@
 
 namespace StevensDev
 {
-
+namespace sgdm {}
+namespace sgdc {}
 }
 
 int main( int, char** );

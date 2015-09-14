@@ -1,0 +1,16 @@
+// default_allocator.cpp
+
+#include "default_allocator.h"
+
+DefaultAllocator::DefaultAllocator() {
+    pos = nullptr;
+}
+
+T* DefaultAllocator::get( int count ) {
+    ASSERT( count != 0 );
+
+    return reinterpret_cast<pointer>(::operator new(cnt * sizeof (T)));
+}
+void DefaultAllocator::release( T* pointer, int count ) {
+    delete(pointer);
+}
