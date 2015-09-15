@@ -23,7 +23,7 @@ TEST( DynamicArray, push ) {
     EXPECT_EQ( 2, array.at( 2 ) );
     EXPECT_EQ( 7, array.at( 7 ) );
 }
-/*
+
 TEST( DynamicArray, pushFront ) {
     StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
@@ -152,7 +152,7 @@ TEST( DynamicArray, removeAt ) {
 
 TEST( DynamicArray, insertAt ) {
 
-}*/
+}
 
 int main( int argc, char *argv[] ) {
     ::testing::InitGoogleTest( &argc, argv );

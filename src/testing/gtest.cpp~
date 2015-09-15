@@ -4,24 +4,24 @@
 #include <dynamic_array.h>
 
 TEST( DynamicArray, push ) {
-    StevensDev::sgdc::DynamicArray<int> *array = new StevensDev::sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array;
     
-    array->push(0);
-    array->push(1);
-    array->push(2);
-    array->push(3);
-    array->push(4);
-    array->push(5);
-    array->push(6);
-    array->push(7);
-    array->push(8);
-    array->push(9);
-    array->push(10);
+    array.push(0);
+    array.push(1);
+    array.push(2);
+    array.push(3);
+    array.push(4);
+    array.push(5);
+    array.push(6);
+    array.push(7);
+    array.push(8);
+    array.push(9);
+    array.push(10);
     
-    EXPECT_EQ( 0, array->at( 0 ) );
-    EXPECT_EQ( 1, array->at( 1 ) );
-    EXPECT_EQ( 2, array->at( 2 ) );
-    EXPECT_EQ( 7, array->at( 7 ) );
+    EXPECT_EQ( 0, array.at( 0 ) );
+    EXPECT_EQ( 1, array.at( 1 ) );
+    EXPECT_EQ( 2, array.at( 2 ) );
+    EXPECT_EQ( 7, array.at( 7 ) );
 }
 /*
 TEST( DynamicArray, pushFront ) {
