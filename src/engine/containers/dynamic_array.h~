@@ -22,11 +22,11 @@ template<typename T> class DynamicArray {
       // add more spaces for elements
   public:
       // CONSTRUCTORS //
-    DynamicArray<T>();
+    DynamicArray();
       // default constructor
     DynamicArray( IAllocator<T>* alloc );
       // pointer to an allocator for use with memory
-    DynamicArray<T>( DynamicArray<T> &alloc );
+    DynamicArray( DynamicArray<T> &alloc );
       // copy constructor
     ~DynamicArray();
       // desturctor
@@ -34,7 +34,13 @@ template<typename T> class DynamicArray {
     DynamicArray &operator = ( const DynamicArray &alloc);
       // assignment operator
       // MUTATORS //
-    void push( const T& element );
+void push( const T& element ) {
+    if( length >= maxSize ) {
+        reallocate( length + 10 );
+    }
+    array[length] = element;
+    length++;
+};
       // adds element to end of collection, grow
     void pushFront( T element);
       // pushes to the front of the collection, grow, shift

@@ -22,11 +22,11 @@ template<typename T> class DynamicArray {
       // add more spaces for elements
   public:
       // CONSTRUCTORS //
-    DynamicArray<T>();
+    DynamicArray();
       // default constructor
     DynamicArray( IAllocator<T>* alloc );
       // pointer to an allocator for use with memory
-    DynamicArray<T>( DynamicArray<T> &alloc );
+    DynamicArray( DynamicArray<T> &alloc );
       // copy constructor
     ~DynamicArray();
       // desturctor
