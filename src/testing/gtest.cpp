@@ -26,7 +26,7 @@ TEST( DynamicArray, push ) {
 }
 
 TEST( DynamicArray, pushFront ) {
-    sgdc::DynamicArray<int> array = sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
     array.pushFront(0);
     array.pushFront(1);
@@ -47,7 +47,7 @@ TEST( DynamicArray, pushFront ) {
 }
 
 TEST( DynamicArray, pop ) {
-    sgdc::DynamicArray<int> array = sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
     array.push(0);
     array.push(1);
@@ -67,7 +67,7 @@ TEST( DynamicArray, pop ) {
 }
 
 TEST( DynamicArray, popFront ) {
-    sgdc::DynamicArray<int> array = sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
     array.push(0);
     array.push(1);
@@ -87,7 +87,7 @@ TEST( DynamicArray, popFront ) {
 }
 
 TEST( DynamicArray, getLength ) {
-    sgdc::DynamicArray<int> array = sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
     EXPECT_EQ( 0, array.getLength() );
     array.push(0);
@@ -107,7 +107,7 @@ TEST( DynamicArray, getLength ) {
 }
 
 TEST( DynamicArray, at ) {
-    sgdc::DynamicArray<int> array = sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
     array.push(0);
     array.push(1);
@@ -128,7 +128,7 @@ TEST( DynamicArray, at ) {
 }
 
 TEST( DynamicArray, brackets ) {
-    sgdc::DynamicArray<int> array = sgdc::DynamicArray<int>();
+    StevensDev::sgdc::DynamicArray<int> array = StevensDev::sgdc::DynamicArray<int>();
     
     array.push(0);
     array.push(1);

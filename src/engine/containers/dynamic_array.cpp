@@ -4,8 +4,10 @@
 #include <default_allocator.h>
 #include <iostream>
 
-template<typename T> class DynamicArray {class
-    DynamicArray::DynamicArray<T>() {
+namespace StevensDev {
+namespace sgdc {
+template<typename T> class DynamicArray {
+    StevensDev::sgdc::DynamicArray::DynamicArray<T>() {
         arrayAlloc = DefaultAllocator();
         maxSize = 10;
         array = arrayAlloc.get(sizeof(T) * maxSize);
@@ -137,4 +139,6 @@ template<typename T> class DynamicArray {class
         arrayAlloc.release( array, sizeof( T ) * maxSize );
         array = newArray;
     }
+}
+}
 }

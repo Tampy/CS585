@@ -7,10 +7,6 @@
 
 namespace StevensDev {
 namespace sgdc {
-template<typename T> class DynamicArray;
-}
-}
-
 template<typename T> class DynamicArray {
   private:
     IAllocator<T> arrayAlloc;
@@ -60,5 +56,7 @@ template<typename T> class DynamicArray {
     T operator [] ( int index ) const;
       // retrieves an element, undefined behavior if out of bounds
 };
+}
+}
 
 #endif
