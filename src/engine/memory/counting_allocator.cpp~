@@ -12,6 +12,16 @@ CountingAllocator::CountingAllocator( CountingAllocator alloc ) {
     releaseCount = alloc.getReleaseCount();
 }
 
+CountingAllocator::~CountingAllocator() {
+
+}
+
+CountingAllocator &operator = ( const CountingAllocator &alloc ) {
+    allocCount = &alloc.getAllocationCount();
+    releaseCount = &alloc.getReleaseCount();
+    delete alloc;
+}
+
 int const CountingAllocator::getAllocationCount() {
     return allocCount;
 }

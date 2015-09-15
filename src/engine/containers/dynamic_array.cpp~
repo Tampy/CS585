@@ -127,7 +127,7 @@ template<typename T> class DynamicArray {
         array[i] = nullptr;
     }
     
-    void DynamicArray::reallocate( int size ) {
+    void reallocate( int size ) {
         T* newArray = arrayAlloc.get( sizeof(T) * size );
         int i;
         for( i = 0; i < length; i++ ) {

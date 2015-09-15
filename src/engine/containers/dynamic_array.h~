@@ -46,7 +46,7 @@ template<typename T> class DynamicArray {
       // removes and retrieves the first element, shifts
     T removeAt( unsigned int index );
       // removes, throws if invalid, shifts
-    void insertAt( unsigned int index );
+    T insertAt( unsigned int index );
       // can grow, shifts
       // ACCESSORS //
     unsigned int const getLength();

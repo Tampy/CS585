@@ -21,6 +21,9 @@ class CountingAllocator : public DefaultAllocator<T> {
       // CONSTRUCTORS //
     CountingAllocator();
       // default constructors
+      // FREE OPERATIONS //
+    CountingAllocator &operator = ( const &CountingAllocator );
+      // assignment operator
       // ACCESSORS //
     int const getAllocationCount();
       // number of allocations that occurred
