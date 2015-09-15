@@ -24,7 +24,7 @@ template<typename T> class DynamicArray {
       // add more spaces for elements
   public:
       // CONSTRUCTORS //
-    DynamicArray();
+    DynamicArray<T>();
       // default constructor
     DynamicArray( IAllocator<T>* alloc );
       // pointer to an allocator for use with memory
@@ -46,7 +46,7 @@ template<typename T> class DynamicArray {
       // removes and retrieves the first element, shifts
     T removeAt( unsigned int index );
       // removes, throws if invalid, shifts
-    T insertAt( unsigned int index );
+    void insertAt( unsigned int index );
       // can grow, shifts
       // ACCESSORS //
     unsigned int const getLength();

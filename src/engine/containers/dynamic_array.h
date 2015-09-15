@@ -5,8 +5,10 @@
 
 #include <iallocator.h>
 
+namespace StevensDev {
 namespace sgdc {
 template<typename T> class DynamicArray;
+}
 }
 
 template<typename T> class DynamicArray {
@@ -24,7 +26,7 @@ template<typename T> class DynamicArray {
       // add more spaces for elements
   public:
       // CONSTRUCTORS //
-    DynamicArray();
+    DynamicArray<T>();
       // default constructor
     DynamicArray( IAllocator<T>* alloc );
       // pointer to an allocator for use with memory

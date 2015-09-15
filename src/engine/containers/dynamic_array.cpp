@@ -4,8 +4,8 @@
 #include <default_allocator.h>
 #include <iostream>
 
-template<typename T> class DynamicArray {
-    DynamicArray::DynamicArray() {
+template<typename T> class DynamicArray {class
+    DynamicArray::DynamicArray<T>() {
         arrayAlloc = DefaultAllocator();
         maxSize = 10;
         array = arrayAlloc.get(sizeof(T) * maxSize);
@@ -84,6 +84,7 @@ template<typename T> class DynamicArray {
         }
         catch (Exception e) {
             cout << "Out of bounds exception." << endl;
+            return nullptr;
         }
     }
 
