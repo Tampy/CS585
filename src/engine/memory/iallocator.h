@@ -13,5 +13,8 @@ class IAllocator {
   public:
     virtual T* get( int count );
     virtual void release( T*, int count );
+    void construct( T* pointer, ... );
+    void construct( T* pointer, const T& copy );
+    void destruct( T* pointer );
 };
 #endif
