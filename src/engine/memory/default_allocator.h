@@ -3,24 +3,30 @@
 #ifndef DEFAULT_ALLOCATOR_H
 #define DEFAULT_ALLOCATOR_H
 
+#include <assert.h>
 #include "iallocator.h"
 
+namespace StevensDev{
 namespace sgdm {
-template<class T>
-class DefaultAllocator;
-}
-
-template<class T>
-class DefaultAllocator : public IAllocator {
+template<typename T>
+class DefaultAllocator : public IAllocator<T> {
   public:
       // CONSTRUCTORS //
-    DefaultAllocator();
+    DefaultAllocator() { }
       // default constructor
-    ~DefaultAllocator();
+    ~DefaultAllocator() { }
       // destructor
      // MEMBER FUNCTIONS //
-    T* get( int count );
-    void release( T*, int count );
+    T* get( int count ) {
+        assert( count != 0 );
+
+        return reinterpret_cast<T*>(::operator new(count * sizeof (T)));
+    }
+    void release( T* pointer, int count ) {
+        delete(pointer);
+    }
 };
+}
+}
 
 #endif

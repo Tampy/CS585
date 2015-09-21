@@ -1,7 +1,7 @@
 // dynamic_array.cpp
 
 #include "dynamic_array.h"
-#include <default_allocator.h>
+/*#include <default_allocator.h>
 #include <iostream>
 
 namespace StevensDev {
@@ -98,8 +98,8 @@ T const DynamicArray<T>::at( unsigned int index ) {
 
 T DynamicArray<T>::operator [] ( int index ) {
     return array[index];
-
 }
+
 T const DynamicArray<T>::operator [] ( int index ) {
     return array[index];
 }
@@ -145,7 +145,7 @@ void DynamicArray<T>::reallocate( int size ) {
     arrayAlloc.release( array, sizeof( T ) * maxSize );
     array = newArray;
 }
-}
+}*/
 }
 
 

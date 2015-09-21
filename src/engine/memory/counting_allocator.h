@@ -19,21 +19,34 @@ class CountingAllocator : public DefaultAllocator<T> {
     static int totalRelease;
   public:
       // CONSTRUCTORS //
-    CountingAllocator();
+    CountingAllocator() {
+        allocCount = 0;
+        releaseCount = 0;
+    }
       // default constructors
       // ACCESSORS //
-    int const getAllocationCount();
+    int const getAllocationCount() { return allocCount; }
       // number of allocations that occurred
-    int const getReleaseCount();
+    int const getReleaseCount() { return releaseCount; }
       // number of releases that occurred
-    int const getOutstandingCount();
+    int const getOutstandingCount() { return allocCount - releaseCount; }
       // allocations - releases
-    static int getTotalAllocationCount();
+    static int getTotalAllocationCount() { return totalAlloc; }
       // allocations across instances
-    static int getTotalReleaseCount();
+    static int getTotalReleaseCount() { return totalRelease; }
       // releases across instances
-    static int getOutstandingCount();
+    static int getOutstandingCount() { return totalAlloc - totalRelease; }
       // allocations - releases across instances
+    T* get( int count ) {
+        allocCount++;
+        totalAlloc++;
+        DefaultAllocator::get( count );
+    }
+    void release( T* pointer, int count ) {
+        releaseCount++;
+        totalRelease++;
+        DefaultAllocator::release( pointer, count );
+    }
 };
 
 #endif

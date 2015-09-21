@@ -19,7 +19,7 @@ class IAllocator {
         new ( pointer ) T( std::move( value ) );
     }
     void destruct( T* pointer ) {
-        pointer->~T( );
+        T->~T( );
     }
 };
 }

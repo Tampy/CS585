@@ -6,16 +6,6 @@
 
 namespace StevensDev {
 namespace sgdc {
-
-template<typename T>
-void DynamicArray<T>::push( const T& element ) {
-    if( length >= maxSize ) {
-        reallocate( length + 10 );
-    }
-    array[length] = &element;
-    length++;
-}
-
 template<typename T>
 DynamicArray<T>::DynamicArray() {
     arrayAlloc = DefaultAllocator();
@@ -54,6 +44,15 @@ DynamicArray DynamicArray<T>::&operator = ( const DynamicArray &otherArray ) {
     }
     length = &otherArray.getLength();
     delete( array );
+}
+
+template<typename T>
+void DynamicArray<T>::push( const T& element ) {
+    if( length >= maxSize ) {
+        reallocate( length + 10 );
+    }
+    array[length] = &element;
+    length++;
 }
 
 template<typename T>
@@ -99,8 +98,8 @@ T const DynamicArray<T>::at( unsigned int index ) {
 
 T DynamicArray<T>::operator [] ( int index ) {
     return array[index];
-
 }
+
 T const DynamicArray<T>::operator [] ( int index ) {
     return array[index];
 }

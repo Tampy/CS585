@@ -1,0 +1,11 @@
+// iallocator.cpp
+
+#include "iallocator.h"
+
+void construct(T* pointer, const T& value) {
+    new (ptr) T(value);
+}
+
+void construct(T* pointer, const T&& value) {
+    new (ptr) T(std::move(value));
+}

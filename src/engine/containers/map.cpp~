@@ -2,7 +2,6 @@
 
 #include "map.h"
 
-/*
 namespace StevensDev {
 namespace sgdc {
 template<typename T>
@@ -84,4 +83,4 @@ T Map<T>::remove( const string& key ) {
     return removedValue;
 }
 }
-}*/
+}

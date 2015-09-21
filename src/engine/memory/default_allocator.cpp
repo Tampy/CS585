@@ -2,7 +2,7 @@
 
 #include "default_allocator.h"
 
-DefaultAllocator::DefaultAllocator() {
+/*DefaultAllocator::DefaultAllocator() {
     pos = nullptr;
 }
 
@@ -15,4 +15,4 @@ T* DefaultAllocator::get( int count ) {
 }
 void DefaultAllocator::release( T* pointer, int count ) {
     delete(pointer);
-}
+}*/

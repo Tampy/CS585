@@ -49,7 +49,7 @@ template<typename T> class Map {
             newNode.key = key;
             table[hashValue] = newNode;
         }
-        return table[hashValue].value;
+        return table[hashValue];
     }
       // Mutable
     T &operator [] ( const std::string &key ) const {

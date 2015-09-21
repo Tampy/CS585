@@ -1,5 +1,6 @@
 cmake_minimum_required (VERSION 2.6)
 project (CS585)
+add_definitions(-std=c++11)
 
 # GTest
 enable_testing()
