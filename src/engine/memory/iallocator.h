@@ -15,12 +15,15 @@ class IAllocator {
     void construct( T* pointer, const T& value) {
         new ( pointer ) T( value );
     }
+      //  Construct a T object in-place by copy
     void construct( T* pointer, const T&& value ) {
         new ( pointer ) T( std::move( value ) );
     }
+      // Construct a T object in-place by move
     void destruct( T* pointer ) {
         pointer->~T( );
     }
+      // Call the destructor on an object
 };
 }
 }

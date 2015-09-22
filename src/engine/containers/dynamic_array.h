@@ -59,7 +59,7 @@ template<typename T> class DynamicArray {
       // CONSTRUCTORS //
     DynamicArray() {
         maxSize = 10;
-        array = arrayAlloc.get(sizeof(T) * maxSize);
+        array = arrayAlloc.get( maxSize );
         int i;
         for( i = 0; i < maxSize; i++ ) {
             arrayAlloc.construct( &array[i], T() );
@@ -70,7 +70,7 @@ template<typename T> class DynamicArray {
       // default constructor
     DynamicArray( sgdm::IAllocator<T>* alloc ) {
         *arrayAlloc = alloc;
-        array = arrayAlloc.get(sizeof(T) * maxSize);
+        array = arrayAlloc.get( maxSize );
         int i;
         for( i = 0; i < maxSize; i++ ) {
             arrayAlloc.construct( &array[i], T() );
@@ -80,7 +80,7 @@ template<typename T> class DynamicArray {
       // pointer to an allocator for use with memory
     DynamicArray ( int startingMaxSize ) {
         maxSize = startingMaxSize;
-        array = arrayAlloc.get(sizeof(T) * maxSize);
+        array = arrayAlloc.get( maxSize );
         int i;
         for( i = 0; i < maxSize; i++ ) {
             arrayAlloc.construct( &array[i], T() );
@@ -90,7 +90,7 @@ template<typename T> class DynamicArray {
       //  initializes with a certain maximum size
     DynamicArray( DynamicArray<T> &otherArray ) {
         maxSize = otherArray.getLength();
-        array = arrayAlloc.get(sizeof(T) * 10);
+        array = arrayAlloc.get( 10 );
         int i = 0;
         for( i = 0; i < maxSize; i++ ) {
             arrayAlloc.construct( &array[i], T() );
@@ -100,15 +100,20 @@ template<typename T> class DynamicArray {
     }
       // copy constructor
     ~DynamicArray() {
-        //delete( array );
+        int i;
+        for( i = 0; i < maxSize; i++ ) {
+            arrayAlloc.destruct( &array[i] );
+        }
+        // arrayAlloc.release( array, sizeof( T ) * maxSize );
     }
       // destructor
       // FREE OPERATORS //
     DynamicArray &operator = ( const DynamicArray &otherArray) {
         maxSize = otherArray.getMaxSize();
+        array = arrayAlloc.get( maxSize );
         int i = 0;
         for( i = 0; i < maxSize; i++ ) {
-            push( otherArray[i] );
+            arrayAlloc.construct( &array[i], otherArray[i] );
         }
         length = otherArray.getLength();
     }

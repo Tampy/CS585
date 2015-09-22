@@ -23,7 +23,12 @@ class CountingAllocator : public DefaultAllocator<T> {
         allocCount = 0;
         releaseCount = 0;
     }
-      // default constructors
+      // default constructor
+    CountingAllocator( CountingAllocator& alloc ) {
+      allocCount = alloc.getAllocationCount();
+      releaseCount = alloc.getReleaseCount();
+    }
+      // copy constructor
       // ACCESSORS //
     int const getAllocationCount() { return allocCount; }
       // number of allocations that occurred
@@ -42,11 +47,13 @@ class CountingAllocator : public DefaultAllocator<T> {
         totalAlloc++;
         DefaultAllocator::get( count );
     }
+      // adjustment to default get in order to count
     void release( T* pointer, int count ) {
         releaseCount++;
         totalRelease++;
         DefaultAllocator::release( pointer, count );
     }
+      // adjustment to default release in order to count
 };
 
 #endif

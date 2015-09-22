@@ -28,6 +28,7 @@ template<typename T> class Map {
         hashValue = hashValue % table.getMaxSize();
         return hashValue;
     }
+      // creates a hash value from a key
   public:
      // CONSTRUCTORS //
     Map() {
@@ -38,8 +39,26 @@ template<typename T> class Map {
         allocator = alloc;
     }
       // constructor for allocator
+    Map( Map<T>& otherMap ) {
+        allocator = sgdm::DefaultAllocator<T>();
+        DynamicArray<std::string> keyArray = otherMap.keys();
+        int i = 0;
+        for( i = 0; i < keyArray.getLength(); i++ ) {
+            table[keyArray[i]] = otherMap[keyArray[i]];
+        }
+    }
+      // copy constructor
+    ~Map() { }
+      // destructor
       // FREE OPERATORS //
-    Map &operator = ( const Map<T> &otherMap);
+    Map &operator = ( const Map<T> &otherMap) {
+        DynamicArray<std::string> keyArray = otherMap.keys();
+        int i = 0;
+        for( i = 0; i < keyArray.getLength(); i++ ) {
+            table[keyArray[i]] = otherMap[keyArray[i]];
+        }
+        return *this;
+    }
       // assignment operator
     T &operator [] ( const std::string& key ) {
         int hashValue = hash( key );
@@ -73,7 +92,7 @@ template<typename T> class Map {
             return false;
         }
     }
-          // Determines if a key exists in the map
+      // Determines if a key exists in the map
     DynamicArray<std::string> keys() const {
         int i = 0;
         DynamicArray<std::string> keyArray;;
@@ -97,7 +116,6 @@ template<typename T> class Map {
     }
       // Retrieves all values (immutable)
       // MUTATORS //
-    
     T remove( const std::string& key ) {
         if( !has( key ) ) {
             std::cout << "Key does not exist." << std::endl;
