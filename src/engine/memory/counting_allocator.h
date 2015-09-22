@@ -5,12 +5,9 @@
 
 #include "default_allocator.h"
 
+namespace StevensDev {
 namespace sgdm {
-template<class T>
-class CountingAllocator<T>;
-}
-
-template<class T>
+template<typename T>
 class CountingAllocator : public DefaultAllocator<T> {
   private:
     int allocCount;
@@ -40,20 +37,22 @@ class CountingAllocator : public DefaultAllocator<T> {
       // allocations across instances
     static int getTotalReleaseCount() { return totalRelease; }
       // releases across instances
-    static int getOutstandingCount() { return totalAlloc - totalRelease; }
+    static int getTotalOutstandingCount() { return totalAlloc - totalRelease; }
       // allocations - releases across instances
     T* get( int count ) {
         allocCount++;
         totalAlloc++;
-        DefaultAllocator::get( count );
+        DefaultAllocator<T>::get( count );
     }
       // adjustment to default get in order to count
     void release( T* pointer, int count ) {
         releaseCount++;
         totalRelease++;
-        DefaultAllocator::release( pointer, count );
+        DefaultAllocator<T>::release( pointer, count );
     }
       // adjustment to default release in order to count
 };
+}
+}
 
 #endif
