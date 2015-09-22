@@ -20,13 +20,12 @@ template<typename T> class Map {
     sgdm::DefaultAllocator<T> allocator;
       // MEMBER FUNCTIONS //
     int hash( const std::string &key ) {
-          // TODO: Use a better hash.
         int hashValue = 0;
         int i = 0;
         for ( i= 0; i < key.length(); i++ ) {
             hashValue += key[i];
         }
-        hashValue = hashValue % table.getLength();
+        hashValue = hashValue % table.getMaxSize();
         return hashValue;
     }
   public:
@@ -36,7 +35,7 @@ template<typename T> class Map {
     }
       // default constructor
     Map( sgdm::IAllocator<T>* alloc ) {
-        *allocator = alloc;
+        allocator = alloc;
     }
       // constructor for allocator
       // FREE OPERATORS //
@@ -44,21 +43,21 @@ template<typename T> class Map {
       // assignment operator
     T &operator [] ( const std::string& key ) {
         int hashValue = hash( key );
-        if( !has( key ) ) {
-            node newNode;
-            newNode.key = key;
-            table[hashValue] = newNode;
+        while ( table[hashValue].value != 0 ) {
+            hashValue += 1;
+            if (hashValue > table.getLength() ) {
+                hashValue = 0;
+            }
         }
-        return table[hashValue];
+        node newNode;
+        newNode.key = key;
+        table.insertAt( hashValue, newNode );
+        return table[hashValue].value;
     }
       // Mutable
     T &operator [] ( const std::string &key ) const {
         int hashValue = hash( key );
-        if( !has( key ) ) {
-            node newNode;
-            newNode.key = key;
-            table[hashValue] = newNode;
-        }
+
         return table[hashValue].value;
     }
       // No mutation
@@ -66,7 +65,7 @@ template<typename T> class Map {
     bool has( const std::string &key ) {
         int hashValue = hash( key );
         try {
-            table.at( hashValue );
+            table[hashValue];
             return true;
         }
         catch( std::exception& e ) {
@@ -74,32 +73,36 @@ template<typename T> class Map {
         }
     }
           // Determines if a key exists in the map
-    const DynamicArray<std::string>& keys() const {
+    DynamicArray<std::string> keys() const {
         int i = 0;
-        DynamicArray<std::string> keyArray;
-        for( i = 0; i < table.getLength; i++ ) {
-            keyArray.push( table.at( i ).key );
+        DynamicArray<std::string> keyArray;;
+        for( i = 0; i < table.getMaxSize(); i++ ) {
+            if ( table[i].key != "" ) {
+                keyArray.push( table[i].key );
+            }
         }
-        return &keyArray;
+        return keyArray;
     }
       // Retrives all key (immutable)
-    const DynamicArray<T>& values() const {
+    DynamicArray<T> values() const {
         int i = 0;
         DynamicArray<T> valueArray;
         for( i = 0; i < table.getLength(); i++ ) {
+            if ( table[i].key != "" ) {
             valueArray.push( table.at( i ).value );
         }
-        return &valueArray;
+        return valueArray;
     }
       // Retrieves all values (immutable)
       // MUTATORS //
+    
     T remove( const std::string& key ) {
         if( !has( key ) ) {
-            return nullptr;
+            return 0;
         }
         int hashValue = hash( key );
-        T removedValue = table.at( hashValue ).value;
-        table[hashValue] = nullptr;
+        T removedValue = table[hashValue].value;
+        table[hashValue] = node();
         return removedValue;
     }
       // Removes a key-value

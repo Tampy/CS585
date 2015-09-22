@@ -12,6 +12,10 @@ namespace StevensDev {
 namespace sgdc {
 template<typename T> class DynamicArray {
   private:
+  struct node {
+        std::string key;
+        T value;
+    };
     sgdm::DefaultAllocator<T> arrayAlloc;
     T* array;
     int length;
@@ -22,7 +26,7 @@ template<typename T> class DynamicArray {
         for( i; i < length; i++) {
             array[i - 1] = array[i];
         }
-        // arrayAlloc.destruct( &array[i - 1] );
+        arrayAlloc.destruct( &array[i - 1] );
     }
       // move all array items one over left
     void shiftRight( int startingIndex ) {
@@ -37,10 +41,13 @@ template<typename T> class DynamicArray {
     }
       // move all array items one over right
     void reallocate( int numElements ) {
-        T* newArray = arrayAlloc.get( sizeof(T) * numElements );
+        T* newArray = arrayAlloc.get( numElements );
         int i;
         for( i = 0; i < length; i++ ) {
+            arrayAlloc.construct( &newArray[i], T() );
             newArray[i] = array[i];
+            arrayAlloc.destruct( &array[i] );
+            
         }
         arrayAlloc.release( array, sizeof( T ) * maxSize );
         array = newArray;
@@ -52,21 +59,40 @@ template<typename T> class DynamicArray {
     DynamicArray() {
         maxSize = 10;
         array = arrayAlloc.get(sizeof(T) * maxSize);
+        int i;
+        for( i = 0; i < maxSize; i++ ) {
+            arrayAlloc.construct( &array[i], T() );
+            array[i] = T();
+        }
         length = 0;
     }
       // default constructor
     DynamicArray( sgdm::IAllocator<T>* alloc ) {
         *arrayAlloc = alloc;
         array = arrayAlloc.get(sizeof(T) * maxSize);
+        int i;
+        for( i = 0; i < maxSize; i++ ) {
+            arrayAlloc.construct( &array[i], T() );
+        }
         length = 0;
     }
       // pointer to an allocator for use with memory
-    DynamicArray( DynamicArray<T> &alloc ) {
-        sgdm::IAllocator<T> otherArray;
+    DynamicArray ( int startingMaxSize ) {
+        maxSize = startingMaxSize;
+        array = arrayAlloc.get(sizeof(T) * maxSize);
+        int i;
+        for( i = 0; i < maxSize; i++ ) {
+            arrayAlloc.construct( &array[i], T() );
+        }
+        length = 0;
+    }
+      //  initializes with a certain maximum size
+    DynamicArray( DynamicArray<T> &otherArray ) {
         maxSize = otherArray.getLength();
         array = arrayAlloc.get(sizeof(T) * 10);
         int i = 0;
         for( i = 0; i < maxSize; i++ ) {
+            arrayAlloc.construct( &array[i], T() );
             push( array[i] );
         }
         length = otherArray.getLength();
@@ -75,17 +101,15 @@ template<typename T> class DynamicArray {
     ~DynamicArray() {
         //delete( array );
     }
-      // desturctor
+      // destructor
       // FREE OPERATORS //
-    DynamicArray &operator = ( const DynamicArray &alloc) {
-        sgdm::IAllocator<T> otherArray;
-        maxSize = &otherArray.getLength();
+    DynamicArray &operator = ( const DynamicArray &otherArray) {
+        maxSize = otherArray.getMaxSize();
         int i = 0;
         for( i = 0; i < maxSize; i++ ) {
             push( array[i] );
         }
-        length = &otherArray.getLength();
-        delete( array );
+        length = otherArray.getLength();
     }
       // assignment operator
       // MUTATORS //
@@ -129,14 +153,16 @@ template<typename T> class DynamicArray {
       // removes, throws if invalid, shifts
     void insertAt( unsigned int index, const T& element ) {
         shiftRight( index );
-        array[index] = &element;
+        array[index] = element;
         length++;
     }
       // can grow, shifts
       // ACCESSORS //
-    unsigned int const getLength() { return length; }
+    unsigned int getLength() const { return length; }
       // number of elements contained
-    T const at( unsigned int index ) {
+    unsigned int getMaxSize() const { return maxSize; }
+      // number of elements currently allowed to be added
+    T at( unsigned int index ) const {
         try {
             if( index >= length ) {
                 throw -1;
@@ -148,9 +174,9 @@ template<typename T> class DynamicArray {
         }
     }
       // retrieves an element at a location, throws if out of bounds
-    T operator [] ( int index ) { return array[index]; }
+    T& operator [] ( int index ) { return array[index]; }
       // sets an element, undefined behavior if out of bounds
-    T operator [] ( int index ) const { return array[index]; }
+    T& operator [] ( int index ) const { return array[index]; }
       // retrieves an element, undefined behavior if out of bounds
 };
 }
