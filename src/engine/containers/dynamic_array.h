@@ -7,6 +7,7 @@
 #include <default_allocator.h>
 #include <iallocator.h>
 #include <iostream>
+#include <stdexcept>
 
 namespace StevensDev {
 namespace sgdc {
@@ -163,15 +164,10 @@ template<typename T> class DynamicArray {
     unsigned int getMaxSize() const { return maxSize; }
       // number of elements currently allowed to be added
     T at( unsigned int index ) const {
-        try {
-            if( index >= length ) {
-                throw -1;
-            }
-            return array[index];
+        if( index >= maxSize ) {
+            throw std::out_of_range("index larger than length");
         }
-        catch (int n) {
-            std::cout << "Out of bounds exception." << std::endl;
-        }
+        return array[index];
     }
       // retrieves an element at a location, throws if out of bounds
     T& operator [] ( int index ) { return array[index]; }

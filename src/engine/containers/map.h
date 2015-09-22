@@ -45,7 +45,7 @@ template<typename T> class Map {
         int hashValue = hash( key );
         while ( table[hashValue].value != 0 ) {
             hashValue += 1;
-            if (hashValue > table.getLength() ) {
+            if (hashValue >= table.getMaxSize() ) {
                 hashValue = 0;
             }
         }
@@ -55,9 +55,8 @@ template<typename T> class Map {
         return table[hashValue].value;
     }
       // Mutable
-    T &operator [] ( const std::string &key ) const {
+    const T &operator [] ( const std::string &key ) const {
         int hashValue = hash( key );
-
         return table[hashValue].value;
     }
       // No mutation
@@ -65,8 +64,10 @@ template<typename T> class Map {
     bool has( const std::string &key ) {
         int hashValue = hash( key );
         try {
-            table[hashValue];
-            return true;
+            if ( table[hashValue].key == key) {
+                return true;
+            }
+            return false;
         }
         catch( std::exception& e ) {
             return false;
@@ -99,6 +100,7 @@ template<typename T> class Map {
     
     T remove( const std::string& key ) {
         if( !has( key ) ) {
+            std::cout << "Key does not exist." << std::endl;
             return 0;
         }
         int hashValue = hash( key );
