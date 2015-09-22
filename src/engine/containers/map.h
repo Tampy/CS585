@@ -87,7 +87,7 @@ template<typename T> class Map {
     DynamicArray<T> values() const {
         int i = 0;
         DynamicArray<T> valueArray;
-        for( i = 0; i < table.getLength(); i++ ) {
+        for( i = 0; i < table.getMaxSize(); i++ ) {
             if ( table[i].key != "" ) {
                 valueArray.push( table[i].value );
             }
