@@ -32,14 +32,17 @@ template<typename T> class Map {
   public:
      // CONSTRUCTORS //
     Map() {
+        table = DynamicArray<node>( 127 );
         allocator = sgdm::DefaultAllocator<T>();
     }
       // default constructor
     Map( sgdm::IAllocator<T>* alloc ) {
+        table = DynamicArray<node>( 127 );
         allocator = alloc;
     }
       // constructor for allocator
     Map( Map<T>& otherMap ) {
+        table = DynamicArray<node>( 127 );
         allocator = sgdm::DefaultAllocator<T>();
         DynamicArray<std::string> keyArray = otherMap.keys();
         int i = 0;
@@ -63,10 +66,7 @@ template<typename T> class Map {
     T &operator [] ( const std::string& key ) {
         int hashValue = hash( key );
         while ( table[hashValue].value != 0 ) {
-            hashValue += 1;
-            if (hashValue >= table.getMaxSize() ) {
-                hashValue = 0;
-            }
+            hashValue = (hashValue + 1) % table.getMaxSize();
         }
         node newNode;
         newNode.key = key;
@@ -76,17 +76,31 @@ template<typename T> class Map {
       // Mutable
     const T &operator [] ( const std::string &key ) const {
         int hashValue = hash( key );
+        int lookupChecks = 0;
+        while ( table[hashValue].key != key ) {
+            hashValue = ( hashValue + 1 ) % table.getMaxSize();
+            lookupChecks++;
+            if( lookupChecks > key.length() ) {
+                std::cout << "Key does not exist." << std::endl;
+                return 0;
+            }
+        }
         return table[hashValue].value;
     }
       // No mutation
       // ACCESSORS //
     bool has( const std::string &key ) {
         int hashValue = hash( key );
+        int lookupChecks = 0;
         try {
-            if ( table[hashValue].key == key) {
-                return true;
+            while ( table[hashValue].key != key ) {
+                hashValue = ( hashValue + 1 ) % table.getMaxSize();
+                lookupChecks++;
+                if( lookupChecks > key.length() ) {
+                    return false;
+                }
             }
-            return false;
+            return true;
         }
         catch( std::exception& e ) {
             return false;

@@ -38,7 +38,7 @@ template<typename T> class DynamicArray {
         for( i = length - 1; i > startingIndex; i-- ) {
             array[i] = array[i - 1];
         }
-        // arrayAlloc.destruct( &array[0] );
+        // arrayAlloc.destruct( &array[0], sizeof( T ) * maxSize );
     }
       // move all array items one over right
     void reallocate( int numElements ) {
