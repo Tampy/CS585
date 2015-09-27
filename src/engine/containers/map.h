@@ -3,9 +3,9 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include <dynamic_array.h>
 #include <exception>
-#include <iallocator.h>
+#include <containers/dynamic_array.h>
+#include <memory/iallocator.h>
 #include <string>
 
 namespace StevensDev {

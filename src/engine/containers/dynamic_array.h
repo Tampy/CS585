@@ -4,16 +4,16 @@
 #define DYNAMIC_ARRAY_H
 
 #include <exception>
-#include <default_allocator.h>
-#include <iallocator.h>
 #include <iostream>
+#include <memory/default_allocator.h>
+#include <memory/iallocator.h>
 #include <stdexcept>
 
 namespace StevensDev {
 namespace sgdc {
 template<typename T> class DynamicArray {
   private:
-  struct node {
+    struct node {
         std::string key;
         T value;
     };

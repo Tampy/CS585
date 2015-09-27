@@ -5,7 +5,7 @@ add_definitions(-std=c++11)
 # GTest
 enable_testing()
 find_package(Threads REQUIRED)
-include_directories(. src/ext/gtest-1.7.0/include src/engine/memory src/engine/containers)
+include_directories(. src/ext/gtest-1.7.0/include src/engine)
 link_directories(/src/ext)
 add_subdirectory(src/ext/gtest-1.7.0)
 
