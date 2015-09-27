@@ -96,9 +96,9 @@ bool const JsonEntity::isObject() {
 }
 
 JsonEntity& const JsonEntity::operator [] ( std::string& key ) const {
-
+    return this;
 }
 
 JsonEntity& const JsonEntity::operator [] ( int index ) const {
-    
+    return this;
 }

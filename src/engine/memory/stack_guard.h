@@ -8,13 +8,13 @@ namespace sgdm {
 template<typename T> class StackGuard {
   private:
     T* pointer;
-    StackGuard( StackGuard<T> &otherGuard ) { }
+    StackGuard( StackGuard<T>& guard ) { }
       // copy constructor. Disabled
   public:
       // CONSTRUCTORS //
-    StackGuard( T* rawPointer ) {
-        if ( rawPointer ) {
-            pointer = rawPointer;
+    StackGuard( T* guarded ) {
+        if ( guarded ) {
+            pointer = guarded;
         }
     }
       // default constructor
@@ -25,15 +25,25 @@ template<typename T> class StackGuard {
       // FREE OPERATORS //
     StackGuard &operator = ( const StackGuard &otherGuard );
       // assignment operator
-    T* operator -> ();
+    T* operator -> () {
+      return pointer;
+    }
       // arrow operator
-    bool const operator == ( bool rhs );
+    bool const operator == ( bool rhs ) {
+      bool isNull = ( pointer == nullptr );
+      if ( isNull == rhs ) {
+        return true;
+      }
+      return false;
+    }
       // equality operator
     bool const operator != ( bool rhs ) {
-        return !( *this == rhs )
+        return !( *this == rhs );
     }
       // inequality operator
-    bool const operator ! ();
+    bool const operator ! () {
+        return !( pointer == nullptr );
+    }
       // not operator
 };
 }

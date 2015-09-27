@@ -10,6 +10,9 @@
 namespace StevensDev {
 namespace sgdd {
 struct JsonParser {
+  private:
+    IAllocator<JsonEntity> jsonAllocator;
+    JsonEntity helperParser( const std::string& rawJson );
   public:
     JsonEntity* fromString( const std::string& rawJson, IAllocator* allocator = 0 );
 };

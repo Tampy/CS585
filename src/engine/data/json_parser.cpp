@@ -1,6 +1,7 @@
 // json_parser.cpp
 
 #include "json_parser.h"
+#include <
 #include "json_entity.h"
 #include <sstream>
 
@@ -8,8 +9,7 @@ JsonEntity* JsonParser::fromString( const std::string& rawJson, IAllocator alloc
     /*DynamicArray<string> splitJson;
     std::stringstream ss( rawJson );
     std::string jsonObject;
-    std::string index = "";
-    std::string value = "";
+    
     int delimLocation;
     while ( std::getline( ss, jsonObject, "," ) ) {
         delimLocation = jsonObject.find( ":" );
@@ -21,16 +21,21 @@ JsonEntity* JsonParser::fromString( const std::string& rawJson, IAllocator alloc
         }
         ss.insertAt( index, value );
     }*/
+    if( !allocator ) {
+        jsonAllocator = DefaultAllocator<JsonEntity>();
+    }
+}
 
-    DynamicArray<string> splitJson;
+JsonEntity JsonParser::helperParser ( const std::string& rawJson ) {
     int i, j, substrCount;
-    bool indexRetrieved = false;
-    bool valueRetrieved = false;
+    std::string index = "";
+    std::string value = "";
     for( i = 0; i < rawJson.length(); i++ ) {
         if( rawJson[i] == '\'' ) {
             i++;
             substrCount = rawJson.find( '\'' );
             index.append( rawJson.substr( i, substrCount - 1 ) );
+            rawJson.erase( 0, substrCount );
             i++;
         }
 
@@ -40,26 +45,46 @@ JsonEntity* JsonParser::fromString( const std::string& rawJson, IAllocator alloc
                 i++;
             }
             if( rawJson[i] == '[' ) {
-                //TODO
+                DynamicArray<JsonEntity> jsonArray;
+                std::string jsonArrayValue = "";
+                int bracketLocation = rawJson.find( ']' );
+                while( i < bracketLocation ) {
+                    if ( rawJson[i] == '\'' ) {
+                        i++;
+                        substrCount = rawJson.find( '\'' );
+                        jsonArrayValue = rawJson.substr( i, substrCount - 1 );
+                        rawJson.erase( 0, substrCount );
+                        i++;
+                        jsonArray.push( jsonArrayValue );
+                    }
+                    else {
+                        i++;
+                        substrCount = rawJson.find( ',' );
+                        if ( substrCount == string::npos || substrCount > bracketLocation )
+                        value.append( rawJson.substr( i, substrCount - 1 ) );
+                        rawJson.erase( 0, substrCount );
+                        i++;
+
+                    }
+
+                }
             }
-            else if ( rawJson[i] == '\'' ) {
+            if ( rawJson[i] == '\'' ) {
                 i++;
                 substrCount = rawJson.find( '\'' );
                 value.append( rawJson.substr( i, substrCount - 1 ) );
+                rawJson.erase( 0, substrCount );
                 i++;
             }
             else {
                 i++;
                 substrCount = rawJson.find( ',' );
-                value.append( rawJson.substr( i, substrCount - 1) );
+                value.append( rawJson.substr( i, substrCount - 1 ) );
+                rawJson.erase( 0, substrCount );
                 i++;
             }
         }
     }
 
     splitJson.push( index, value );
-}
-
-string parser (const std::string rawJson ) {
-
 }

@@ -11,14 +11,14 @@ namespace sgdd {
 class JsonEntity {
   private:
     enum EntityTypes { INT, STRING, DOUBLE, ARRAY, OBJECT };
-    union entityUnion {
+    union EntityUnion {
         int jsonNumber;
         std::string jsonName;
         double jsonDecimalNumber;
         DynamicArray<JsonEntity> jsonArray;
         Object jsonItem;
     };
-    entityUnion entity;
+    EntityUnion entity;
   public:
       // CONSTRUCTORS //
     JsonEntity();
@@ -44,6 +44,7 @@ class JsonEntity {
     bool const isObject();
     JsonEntity& const operator [] ( std::string& key ) const;
     JsonEntity& const operator [] ( int index ) const;
+    
 };
 }
 }
