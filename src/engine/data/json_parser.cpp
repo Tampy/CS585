@@ -14,58 +14,85 @@ JsonEntity* JsonParser::fromString( const std::string& rawJson, IAllocator<JsonE
     currentLocation = 0;
     jsonLength = rawJson.length();
     jsonDocument = rawJson;
-}
-
-Token JsonParser::parser() {
+    Token token;
     while( currentLocation < jsonLength ) {
-        removeSpaces();
-        Token returnToken;
-        char tokenTest = jsonDocument[currentLocation];
-        switch( tokenTest ) {
-            case '\'':
-                parseString();
-                returnToken = STRING;
-                break;
-            case '0':
-            case '1':
-            case '2':
-            case '3':
-            case '4':
-            case '5':
-            case '6':
-            case '7':
-            case '8':
-            case '9':
-                returnToken = parseNum();
-                break;
-            case '[':
-                parseArray();
-                returnToken = ARRAY_START;
-                break;
-            default:
-                break;
-        }
+        token = parser();
     }
 }
 
-String& JsonParser::parseString() {
+Token JsonParser::parser() {
+    
+    removeSpaces();
+    Token returnToken;
+    char tokenTest = jsonDocument[currentLocation];
+    switch( tokenTest ) {
+        case '\'':
+            parseString();
+            returnToken = STRING;
+            break;
+        case '0':
+        case '1':
+        case '2':
+        case '3':
+        case '4':
+        case '5':
+        case '6':
+        case '7':
+        case '8':
+        case '9':
+            parseNum();
+            returnToken = INT;
+            break;
+        case '[':
+            parseArray();
+            returnToken = ARRAY_START;
+            break;
+        case ':':
+            returnToken = VALUE_START
+        case ',':
+            returnToken = NEW_ITEM;
+            break;
+        default:
+            break;
+    }
+}
+
+void JsonParser::parseString() {
     std::string parsedString = "";
     for( currentLocation; currentLocation < jsonLength; currentLocation++ ) {
         char quoteTest = jsonDocument[currentLocation];
-        if ( quoteTest != '\'' ) {
-            parsedString.append( jsonDocument[currentLocation] );
+        if( quoteTest != '\'' ) {
+            parsedString.append( quoteTest );
         }
         else {
             break;
         }
     }
-    return parsedString;
+    tokenValue = parsedString;
+}
+
+void JsonParser::parseNum() {
+    std::string parsedNum = "";
+    for( currentLocation; currentLocation < jsonLength; currentLocation++ ) {
+        char numTest = jsonDocument[i];
+        if( numTest >= '0' && numTest <= '9' ) {
+            parsedNum.append( numTest );
+        }
+        else if( numTest == '.' ) {
+            // TODO: do double
+            parsedNum.append( numTest );
+        }
+        else {
+            break;
+        }
+    }
+    tokenValue = parsedNum;
 }
 
 void JsonParser::removeSpaces() {
     for( currentLocation; currentLocation < jsonLength; currentLocation++ ) {
         char spaceTest = jsonDocument[currentLocation];
-        if ( spaceTest != ' ' && spaceTest != '\t' && spaceTest != '\n' ) {
+        if( spaceTest != ' ' && spaceTest != '\t' && spaceTest != '\n' ) {
             break;
         }
     }

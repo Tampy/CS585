@@ -16,10 +16,12 @@ struct JsonParser {
         INT,
         DOUBLE,
         ARRAY_START,
-        ARRAY_END
+        ARRAY_END,
+        VALUE_START,
+        NEW_ITEM
     }
     IAllocator<JsonEntity> jsonAllocator;
-    std::string jsonDocument;
+    std::string tokenValue;
     unsigned int currentLocation;
     unsigned int jsonLength;
     Token parser( const std::string& rawJson );
