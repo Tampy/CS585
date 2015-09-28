@@ -1,32 +1,77 @@
 // json_parser.cpp
 
 #include "json_parser.h"
-#include <
 #include "json_entity.h"
-#include <sstream>
+#include <memory/default_allocator.h>
 
-JsonEntity* JsonParser::fromString( const std::string& rawJson, IAllocator allocator ) {
-    /*DynamicArray<string> splitJson;
-    std::stringstream ss( rawJson );
-    std::string jsonObject;
-    
-    int delimLocation;
-    while ( std::getline( ss, jsonObject, "," ) ) {
-        delimLocation = jsonObject.find( ":" );
-        index = jsonObject.substr( 0, delimLocation );
-        value = jsonObject.substr( delimLocation, jsonObject.length() );
-        delimLocation = jsonObject.find( "[" )
-        if ( bracketLocation ) {
-
-        }
-        ss.insertAt( index, value );
-    }*/
+JsonEntity* JsonParser::fromString( const std::string& rawJson, IAllocator<JsonEntity>* allocator ) {
     if( !allocator ) {
         jsonAllocator = DefaultAllocator<JsonEntity>();
     }
+    else {
+        jsonAllocator = allocator;
+    }
+    currentLocation = 0;
+    jsonLength = rawJson.length();
+    jsonDocument = rawJson;
 }
 
-JsonEntity JsonParser::helperParser ( const std::string& rawJson ) {
+Token JsonParser::parser() {
+    while( currentLocation < jsonLength ) {
+        removeSpaces();
+        Token returnToken;
+        char tokenTest = jsonDocument[currentLocation];
+        switch( tokenTest ) {
+            case '\'':
+                parseString();
+                returnToken = STRING;
+                break;
+            case '0':
+            case '1':
+            case '2':
+            case '3':
+            case '4':
+            case '5':
+            case '6':
+            case '7':
+            case '8':
+            case '9':
+                returnToken = parseNum();
+                break;
+            case '[':
+                parseArray();
+                returnToken = ARRAY_START;
+                break;
+            default:
+                break;
+        }
+    }
+}
+
+String& JsonParser::parseString() {
+    std::string parsedString = "";
+    for( currentLocation; currentLocation < jsonLength; currentLocation++ ) {
+        char quoteTest = jsonDocument[currentLocation];
+        if ( quoteTest != '\'' ) {
+            parsedString.append( jsonDocument[currentLocation] );
+        }
+        else {
+            break;
+        }
+    }
+    return parsedString;
+}
+
+void JsonParser::removeSpaces() {
+    for( currentLocation; currentLocation < jsonLength; currentLocation++ ) {
+        char spaceTest = jsonDocument[currentLocation];
+        if ( spaceTest != ' ' && spaceTest != '\t' && spaceTest != '\n' ) {
+            break;
+        }
+    }
+}
+
+/*JsonEntity JsonParser::helperParser ( const std::string& rawJson ) {
     int i, j, substrCount;
     std::string index = "";
     std::string value = "";
@@ -87,4 +132,4 @@ JsonEntity JsonParser::helperParser ( const std::string& rawJson ) {
     }
 
     splitJson.push( index, value );
-}
+}*/

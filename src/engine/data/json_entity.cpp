@@ -1,24 +1,42 @@
 // json_entity.cpp
 
 #include "json_entity.h"
+#include <iostream>
 #include <stdexcept>
 
+JsonEntity::JsonEntity() {
+    type = OBJECT;
+    entity = nullptr;
+}
+
+JsonEntity::JsonEntity( JsonEntity& otherEntity ) {
+    type = otherEntity.type();
+    switch( type ) {
+        case INT:
+            entity = otherEntity.asInt();
+            break;
+        case STRING:
+            entity = otherEntity.asString();
+            break;
+        case DOUBLE:
+            entity = otherEntity.asDouble(); 
+            break;
+        case ARRAY:
+            entity = otherEntity.asArray();
+            break;
+        default:
+            entity = otherEntity.asString();
+            break;
+    }
+}
+
+JsonEntity &operator = ( const JsonEntity &otherEntity ) {
+    JsonEntity( otherEntity );
+    return this;
+}
+
 EntityTypes const JsonEntity::type() {
-    if ( isInt() ) {
-        return INT;
-    }
-    else if ( isString() ) {
-        return STRING;
-    }
-    else if ( isDouble() ) {
-        return DOUBLE;
-    }
-    else if ( isArray() ) {
-        return ARRAY;
-    }
-    else {
-        return OBJECT;
-    }
+    return type;
 }
 
 int const JsonEntity::asInt() {
@@ -89,16 +107,31 @@ bool const JsonEntity::isArray() {
 }
 
 bool const JsonEntity::isObject() {
-    if( type() == OBJECT ) {
+    const std::type_info& objectType = typeid( Map<JsonEntity> );
+    const std::type_info& entityType = typeid( entity );
+    if( objectType == entityType ) {
         return true;
     }
     return false;
 }
 
 JsonEntity& const JsonEntity::operator [] ( std::string& key ) const {
-    return this;
+    if( !isObject() ) {
+        std::cout << "Invalid argument." << std::endl;
+    }
+    return entity[key];
 }
 
 JsonEntity& const JsonEntity::operator [] ( int index ) const {
-    return this;
+    if( !isArray() ) {
+        std::cout << "Invalid argument." << std::endl;
+    }
+    return entity[index];
+}
+
+JsonEntity& JsonEntity::operator [] ( std::string& key ) {
+    if( !isObject() ) {
+        std::cout << "Invalid argument." << std::endl;
+    }
+    return entity[key];
 }

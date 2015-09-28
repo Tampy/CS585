@@ -11,8 +11,18 @@ namespace StevensDev {
 namespace sgdd {
 struct JsonParser {
   private:
+    enum Token {
+        STRING,
+        INT,
+        DOUBLE,
+        ARRAY_START,
+        ARRAY_END
+    }
     IAllocator<JsonEntity> jsonAllocator;
-    JsonEntity helperParser( const std::string& rawJson );
+    std::string jsonDocument;
+    unsigned int currentLocation;
+    unsigned int jsonLength;
+    Token parser( const std::string& rawJson );
   public:
     JsonEntity* fromString( const std::string& rawJson, IAllocator* allocator = 0 );
 };

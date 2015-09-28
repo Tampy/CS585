@@ -3,7 +3,8 @@
 #ifndef JSON_ENTITY_H
 #define JSON_ENTITY_H
 
-#include <memory/dynamic_array.h>
+#include <containers/map.h>
+#include <containers/dynamic_array.h>
 #include <string>
 
 namespace StevensDev {
@@ -11,14 +12,18 @@ namespace sgdd {
 class JsonEntity {
   private:
     enum EntityTypes { INT, STRING, DOUBLE, ARRAY, OBJECT };
-    union EntityUnion {
-        int jsonNumber;
-        std::string jsonName;
-        double jsonDecimalNumber;
-        DynamicArray<JsonEntity> jsonArray;
-        Object jsonItem;
+    struct Entity {
+        EntityTypes entityType;
+        union EntityUnion {
+            int jsonNumber;
+            std::string jsonName;
+            double jsonDecimalNumber;
+            DynamicArray<JsonEntity> jsonArray;
+            Object jsonItem;
+            Map<JsonEntity> jsonMap;
+        }
     };
-    EntityUnion entity;
+    Entity entity;
   public:
       // CONSTRUCTORS //
     JsonEntity();
@@ -37,6 +42,7 @@ class JsonEntity {
     std::string& const asString() const;
     double const asDouble();
     DynamicArray <JsonEntity>& const asArray() const;
+    JsonEntity const asJsonEntity() const;
     bool const isInt();
     bool const isString();
     bool const isDouble();
@@ -44,7 +50,7 @@ class JsonEntity {
     bool const isObject();
     JsonEntity& const operator [] ( std::string& key ) const;
     JsonEntity& const operator [] ( int index ) const;
-    
+    JsonEntity& operator [] ( std::string& key );
 };
 }
 }
