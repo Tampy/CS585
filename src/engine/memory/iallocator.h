@@ -10,6 +10,7 @@ namespace sgdm {
 template<typename T>
 class IAllocator {
   public:
+    
     virtual T* get( int count ) = 0;
     virtual void release( T*, int count ) = 0;
     void construct( T* pointer, const T& value) {

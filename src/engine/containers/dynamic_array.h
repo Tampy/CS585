@@ -52,7 +52,7 @@ template<typename T> class DynamicArray {
         }
         arrayAlloc.release( array, sizeof( T ) * maxSize );
         array = newArray;
-        maxSize = sizeof(T) * numElements;
+        maxSize = sizeof( T ) * numElements;
     }
       // add more spaces for elements
   public:
@@ -177,7 +177,7 @@ template<typename T> class DynamicArray {
       // retrieves an element at a location, throws if out of bounds
     T& operator [] ( int index ) { return array[index]; }
       // sets an element, undefined behavior if out of bounds
-    T& operator [] ( int index ) const { return array[index]; }
+    const T& operator [] ( int index ) const { return array[index]; }
       // retrieves an element, undefined behavior if out of bounds
 };
 }

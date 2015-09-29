@@ -65,7 +65,7 @@ template<typename T> class Map {
       // assignment operator
     T &operator [] ( const std::string& key ) {
         int hashValue = hash( key );
-        while ( table[hashValue].value != 0 ) {
+        while ( table[hashValue].key != "" ) {
             hashValue = (hashValue + 1) % table.getMaxSize();
         }
         node newNode;
@@ -141,6 +141,9 @@ template<typename T> class Map {
         return removedValue;
     }
       // Removes a key-value
+    unsigned int getLength() {
+        return keys().getLength();
+    }
 };
 }
 }

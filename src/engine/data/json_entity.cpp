@@ -6,23 +6,23 @@
 
 JsonEntity::JsonEntity() {
     type = OBJECT;
-    entity = nullptr;
+    entity = Map<JsonEntity>;
 }
 
 JsonEntity::JsonEntity( JsonEntity& otherEntity ) {
-    type = otherEntity.type();
+    entity.type = otherEntity.type();
     switch( type ) {
         case INT:
-            entity = otherEntity.asInt();
+            entity.jsonNumber = otherEntity.asInt();
             break;
         case STRING:
-            entity = otherEntity.asString();
+            entity.jsonName = otherEntity.asString();
             break;
         case DOUBLE:
-            entity = otherEntity.asDouble(); 
+            entity.jsonDecimalNumber = otherEntity.asDouble(); 
             break;
         case ARRAY:
-            entity = otherEntity.asArray();
+            entity.jsonArray = otherEntity.asArray();
             break;
         default:
             entity = otherEntity.asString();
@@ -30,8 +30,42 @@ JsonEntity::JsonEntity( JsonEntity& otherEntity ) {
     }
 }
 
-JsonEntity &operator = ( const JsonEntity &otherEntity ) {
+JsonEntity::~JsonEntity() {
+
+}
+
+JsonEntity& JsonEntity::operator = ( const JsonEntity &otherEntity ) {
     JsonEntity( otherEntity );
+    return this;
+}
+
+JsonEntity& JsonEntity::operator = ( const int &jsonObject ) {
+    entity.jsonNumber = jsonObject;
+    entity.type = INT;
+    return this;
+}
+
+JsonEntity& JsonEntity::operator = ( const std::string &jsonObject ) {
+    entity.jsonString = jsonObject;
+    entity.type = STRING;
+    return this;
+}
+
+JsonEntity& JsonEntity::operator = ( const double &jsonObject ) {
+    entity.jsonDecimalNumber = jsonObject;
+    entity.type = DOUBLE;
+    return this;
+}
+
+JsonEntity& JsonEntity::operator = ( const DynamicArray<JsonEntity> &jsonObject ) {
+    entity.jsonArray = jsonObject;
+    entity.type = ARRAY;
+    return this;
+}
+
+JsonEntity& JsonEntity::operator = ( const Map<JsonEntity> &jsonObject ) {
+    entity.jsonMap = jsonObject;
+    entity.type = OBJECT;
     return this;
 }
 
@@ -46,7 +80,7 @@ int const JsonEntity::asInt() {
     throw std::invalid_argument;
 }
 
-std::string& const JsonEntity::asString() const {
+const std::string& JsonEntity::asString() const {
     if( isString() ) {
         return std::to_string();
     }
@@ -115,21 +149,21 @@ bool const JsonEntity::isObject() {
     return false;
 }
 
-JsonEntity& const JsonEntity::operator [] ( std::string& key ) const {
+const JsonEntity& JsonEntity::operator [] ( const std::string& key ) const {
     if( !isObject() ) {
         std::cout << "Invalid argument." << std::endl;
     }
     return entity[key];
 }
 
-JsonEntity& const JsonEntity::operator [] ( int index ) const {
+const JsonEntity& JsonEntity::operator [] ( const int index ) const {
     if( !isArray() ) {
         std::cout << "Invalid argument." << std::endl;
     }
     return entity[index];
 }
 
-JsonEntity& JsonEntity::operator [] ( std::string& key ) {
+JsonEntity& JsonEntity::operator [] ( const std::string& key ) {
     if( !isObject() ) {
         std::cout << "Invalid argument." << std::endl;
     }

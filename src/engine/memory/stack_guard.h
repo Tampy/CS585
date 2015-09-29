@@ -19,7 +19,7 @@ template<typename T> class StackGuard {
     }
       // default constructor
     ~StackGuard() {
-      pointer = ~T();
+      pointer->~T();
     }
       // destructor
       // FREE OPERATORS //
