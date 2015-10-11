@@ -7,9 +7,9 @@ enable_testing()
 find_package(Threads REQUIRED)
 file(GLOB_RECURSE SOURCES "src/engine/*.cpp" "src/testing/gtest.cpp")
 file(GLOB_RECURSE HEADERS "src/*.h")
-include_directories(src/ext/gtest-1.7.0/include src/engine)
+include_directories(src/ext/gtest-1.7.0/include src/ext/SFML-2.3.2/include src/engine)
 link_directories(/src/ext)
-add_subdirectory(src/ext/gtest-1.7.0)
+add_subdirectory(src/ext/gtest-1.7.0 src/ext/SFML-2.3.2)
 
 # version number
 set (cs585_VERSION_MAJOR 1)
