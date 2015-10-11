@@ -2,6 +2,9 @@
 
 #include "input.h"
 
+namespace StevensDev {
+namespace sgdi {
+
 Input::Input() {
 
 }
@@ -18,7 +21,7 @@ Input::~Input() {
 
 }
 
-static Input& Input::inst() {
+Input& Input::inst() {
 
 }
 
@@ -36,4 +39,7 @@ bool Input::wasPressed( InputType type ) {
 
 void Input::preTick() {
 
+}
+
+}
 }

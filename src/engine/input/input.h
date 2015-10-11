@@ -3,12 +3,13 @@
 #ifndef INPUT_H
 #define INPUT_H
 
+#include <scene/itickable.h>
+
 namespace StevensDev {
 namespace sgdi {
-class Input : public ITickable {
+class Input : public sgds::ITickable {
   private:
     enum InputType {
-        1_KEY, 2_KEY, 3_KEY, 4_KEY, 5_KEY, 6_KEY, 7_KEY, 8_KEY, 9_KEY, 0_KEY,
         Q_KEY, W_KEY, E_KEY, R_KEY, T_KEY, Y_KEY, U_KEY, I_KEY, O_KEY, P_KEY,
            A_KEY, S_KEY, D_KEY, F_KEY, G_KEY, H_KEY, J_KEY, K_KEY, L_KEY,
                  Z_KEY, X_KEY, C_KEY, V_KEY, B_KEY, N_KEY, M_KEY,
