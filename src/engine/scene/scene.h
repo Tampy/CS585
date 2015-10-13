@@ -15,9 +15,14 @@ class Scene {
       // default constructor
     Scene( Scene& otherScene );
       // copy constructor
-    Scene& operator = ( const Renderer &otherScene );
+    Scene& operator = ( const Scene& otherScene );
       // assignment operator
+    sgdc::DynamicArray<ITickable*> tickables;
+    sgdr::Renderer sceneRenderer;
+    float tickCount;
   public:
+    ~Scene();
+      // destructor
     static Scene& inst();
       // get instance of Scene
     void tick();
@@ -26,7 +31,7 @@ class Scene {
       // Add ITickable object
     void removeTickable( ITickable* tickable );
       // Remove ITickable object
-    void setRenderer( Renderer* renderer );
+    void setRenderer( sgdr::Renderer* renderer );
       // Set Renderer object
 };
 }

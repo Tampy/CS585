@@ -3,7 +3,8 @@
 #ifndef RENDERABLE_SPRITE_H
 #define RENDERABLE_SPRITE_H
 
-#include <Sprite.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
 
 namespace StevensDev {
 namespace sgdr {
@@ -26,6 +27,8 @@ class RenderableSprite {
       // Sets absolute x/y position
     void move( float x, float y );
       // Increments x by x, y by y
+    void setTexture( sf::Texture texture );
+      // Sets texture of sprite
       // ACCESSORS //
     const sf::Sprite& sprite() const;
       // Gets sprite stored in class

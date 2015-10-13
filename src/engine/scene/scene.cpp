@@ -2,35 +2,62 @@
 
 #include "scene.h"
 
-Scene::Scene() {
+namespace StevensDev {
+namespace sgds {
 
+Scene::Scene() {
+    tickCount = 0;
 }
 
 Scene::Scene( Scene& otherScene ) {
-
+    if( this != &otherScene ) {
+        tickables = otherScene.tickables;
+        sceneRenderer = otherScene.sceneRenderer;
+        tickCount = otherScene.tickCount;
+    }
 }
 
-Scene& Scene::operator = ( const Renderer &otherScene ) {
-
+Scene::~Scene() {
+    tickables.~DynamicArray<ITickable*>();
+    sceneRenderer.~Renderer();
 }
 
-static Scene& Scene::inst() {
+Scene& Scene::operator = ( const Scene& otherScene ) {
+    if( this != &otherScene ) {
+        tickables = otherScene.tickables;
+        sceneRenderer = otherScene.sceneRenderer;
+        tickCount = otherScene.tickCount;
+    }
+    return *this;
+}
 
+Scene& Scene::inst() {
+    static Scene instance;
+    return instance;
 }
 
 void Scene::tick() {
-
+    int i;
+    for( i = 0; i < tickables.getLength(); i++ ) {
+        tickables[i]->preTick();
+        tickables[i]->tick( tickCount );
+        tickables[i]->postTick();
+    }
+    sceneRenderer.draw();
+    tickCount++;
 }
 
 void Scene::addTickable( ITickable* tickable ) {
-
+    tickables.push( tickable );
 }
 
 void Scene::removeTickable( ITickable* tickable ) {
-
+    tickables.removeByValue( tickable );
 }
 
-void Scene::setRenderer( Renderer* renderer ) {
-    
+void Scene::setRenderer( sgdr::Renderer* renderer ) {
+    sceneRenderer = *renderer;
 }
 
+}
+}

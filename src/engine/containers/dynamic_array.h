@@ -150,6 +150,10 @@ template<typename T> class DynamicArray {
         return poppedElement;
     }
       // removes and retrieves the first element, shifts
+    void removeByValue( T value ) {
+        std::remove( array, array+sizeof( array )/sizeof( T ), value );
+    }
+      // removes elements with the given value
     T removeAt( unsigned int index ) {
         T removedElement = array[index];
         shiftLeft( index + 1 );
