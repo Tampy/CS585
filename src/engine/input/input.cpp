@@ -74,10 +74,10 @@ bool Input::isKey( InputType type ) {
 
 void Input::preTick() {
     if( event.key.code ) {
-        isDown( event.key.code );
+        isDown( static_cast<InputType>( event.key.code ) );
     }
     else if( event.mouseButton.button ) {
-        isDown( event.mouseButton.button );
+        isDown( static_cast<InputType>( event.mouseButton.button ) );
     }
 }
 
