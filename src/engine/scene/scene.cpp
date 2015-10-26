@@ -19,7 +19,7 @@ Scene::Scene( Scene& otherScene ) {
 
 Scene::~Scene() {
     tickables.~DynamicArray<ITickable*>();
-    sceneRenderer.~Renderer();
+    sceneRenderer->~Renderer();
 }
 
 Scene& Scene::operator = ( const Scene& otherScene ) {
@@ -43,7 +43,7 @@ void Scene::tick() {
         tickables[i]->tick( tickCount );
         tickables[i]->postTick();
     }
-    sceneRenderer.draw();
+    sceneRenderer->draw();
     tickCount++;
 }
 
@@ -56,7 +56,7 @@ void Scene::removeTickable( ITickable* tickable ) {
 }
 
 void Scene::setRenderer( sgdr::Renderer* renderer ) {
-    sceneRenderer = *renderer;
+    sceneRenderer = renderer;
 }
 
 }

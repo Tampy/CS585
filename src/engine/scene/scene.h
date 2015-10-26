@@ -18,7 +18,7 @@ class Scene {
     Scene& operator = ( const Scene& otherScene );
       // assignment operator
     sgdc::DynamicArray<ITickable*> tickables;
-    sgdr::Renderer sceneRenderer;
+    sgdr::Renderer* sceneRenderer;
     float tickCount;
   public:
     ~Scene();
