@@ -11,11 +11,26 @@ namespace StevensDev {
 namespace sgds {
 class NxNSceneGraph : public ITickable {
   private:
+    float dimensions;
+    float divisions;
     sgdc::DynamicArray<ICollider*> colliders;
   public:
+      // CONSTRUCTOR //
+    NxNSceneGraph();
+      // default constructor
+    NxNSceneGraph( NxNSceneGraph& otherScene );
+      // copy constructor
     NxNSceneGraph( float dimensions, int divisions );
+      // constructor that creates dimensions and divisions
+    ~NxNSceneGraph();
+      // destructor
+      // FREE OPERATORS //
+    NxNSceneGraph &operator = ( const NxNSceneGraph &otherScene );
+      // assignment operator
+      // MUTATORS //
     void addCollider( ICollider* collider );
     void removeCollider( ICollider* collider );
+      // ACCESSORS //
     sgdc::DynamicArray<ICollider*> find( float x, float y, float width, float height );
     sgdc::DynamicArray<ICollider*> find( float x, float y,
         float width, float height, unsigned short flags );

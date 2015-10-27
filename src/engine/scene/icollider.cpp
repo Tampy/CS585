@@ -1,29 +1,47 @@
 // icollider.cpp
 
+#include "icollider.h"
+
 namespace StevensDev {
 namespace sgds {
 
+ICollider::ICollider() { }
+
+ICollider::ICollider( ICollider& otherCollider ) {
+    rectBounds = otherCollider.bounds();
+    colliderFlags = otherCollider.flags();
+}
+
+ICollider::~ICollider() {
+    rectBounds.~RectangleBounds();
+}
+
+ICollider& ICollider::operator =( const ICollider& otherCollider ) {
+    rectBounds = otherCollider.rectBounds;
+    colliderFlags = otherCollider.colliderFlags;
+}
+
 const RectangleBounds& ICollider::bounds() const {
-    return bounds;
+    return rectBounds;
 }
 
 unsigned short ICollider::flags() const {
-    return flags;
+    return colliderFlags;
 }
 
 void ICollider::setFlags( unsigned short flags ) {
-    this.flags = flags;
+    colliderFlags = flags;
 }
 
 bool ICollider::canCollide( unsigned short flags ) const {
-    if( this.flags != flags ) {
+    if( colliderFlags != flags ) {
         return false;
     }
     return true;
 }
 
 bool ICollider::doesCollide( const RectangleBounds& candidate ) {
-    return bounds.doesCollide( candidate );
+    return rectBounds.doesCollide( candidate );
 }
 
 }

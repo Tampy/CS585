@@ -1,55 +1,87 @@
 // rectangle_bounds.cpp
 
+#include "rectangle_bounds.h"
+
 namespace StevensDev {
 namespace sgds {
 
+RectangleBounds::RectangleBounds() {
+    rectX = 0;
+    rectY = 0;
+    rectWidth = 200;
+    rectHeight = 200;
+}
+
+RectangleBounds::RectangleBounds( RectangleBounds& otherBounds ) {
+    rectX = otherBounds.x();
+    rectY = otherBounds.y();
+    rectWidth = otherBounds.width();
+    rectHeight = otherBounds.height();
+}
+
+RectangleBounds::RectangleBounds( float x, float y, float width, float height ) {
+    rectX = x;
+    rectY = y;
+    rectWidth = width;
+    rectHeight = height;
+}
+
+RectangleBounds::~RectangleBounds() {}
+
+RectangleBounds& RectangleBounds::operator =( const RectangleBounds& otherBounds ) {
+    rectX = otherBounds.x();
+    rectY = otherBounds.y();
+    rectWidth = otherBounds.width();
+    rectHeight = otherBounds.height();
+}
+
 float RectangleBounds::x() const {
-    return x;
+    return rectX;
 }
 
 float RectangleBounds::y() const {
-    return y;
+    return rectY;
 }
 
 float RectangleBounds::width() const {
-    return width;
+    return rectWidth;
 }
 
 float RectangleBounds::height() const {
-    return height;
+    return rectHeight;
 }
 
 void RectangleBounds::setX( float x ) {
-    this.x = x;
+    rectX = x;
 }
 
 void RectangleBounds::setY( float y ) {
-    this.y = y;
+    rectY = y;
 }
 
 void RectangleBounds::setWidth( float width ) {
-    this.width = width;
+    rectWidth = width;
 }
 
 void RectangleBounds::setHeight( float height ) {
-    this.height = height;
+    rectHeight = height;
 }
 
 void RectangleBounds::setDimensions( float width, float height ) {
-    this.width = width;
-    this.height = height;
+    rectWidth = width;
+    rectHeight = height;
 }
 
 void RectangleBounds::setPosition( float x, float y ) {
-    this.x = x;
-    this.y = y;
+    rectX = x;
+    rectY = y;
 }
 
 bool RectangleBounds::doesCollide( const RectangleBounds& candidate ) {
     float rectBoundsX = candidate.x() + candidate.width();
     float rectBoundsY = candidate.x() + candidate.height();
-    if( rectBoundsX > x && rectBoundsX < x + width ) {
-        if( rectBoundsY > y && rectBoundsY < y + height ) {
+    if( rectBoundsX > rectX && rectBoundsX < rectX + rectWidth ) {
+        if( rectBoundsY > rectY && rectBoundsY < rectY + rectHeight ) {
             return true;
         }
     }
