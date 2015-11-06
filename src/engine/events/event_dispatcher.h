@@ -4,6 +4,7 @@
 #ifndef EVENT_DISPATCHER_H
 #define EVENT_DISPATCHER_H
 
+#include <containers/dynamic_array.h>
 #include <functional>
 #include "ievent.h"
 #include <string>
@@ -14,6 +15,8 @@ namespace sgde
 {
 class EventDispatcher : public ITickable
 {
+  private:
+    DynamicArray< std::function<void( const IEvent& )>* > listeners;
   public:
       // CONSTRUCTORS //
     EventDispatcher();
@@ -27,7 +30,7 @@ class EventDispatcher : public ITickable
       // assignment operator
     void add( const std::string& type, std::function<void( const IEvent& )>* listener );
     void remove( const std::string& type, std::function<void( const IEvent& )>* listener );
-    void dispatch( const IEvent& );
+    void dispatch( const IEvent& event );
       //  called as part of tick, synchronous
 };
 }

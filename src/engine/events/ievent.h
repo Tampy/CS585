@@ -12,6 +12,8 @@ namespace sgde
 {
 class IEvent
 {
+  private:
+    std::string type;
   public:
       // CONSTRUCTORS //
     IEvent();
@@ -25,6 +27,9 @@ class IEvent
       // assignment operator
       // ACCESSORS //
     const std::string type() const;
+      // String or enum (if you want) to provide info
+      // MUTATORS //
+    void setType( std::string newType );
 };
 }
 }
