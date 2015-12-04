@@ -13,7 +13,7 @@ namespace sgde
 class IEvent
 {
   private:
-    std::string type;
+    std::string eventType;
   public:
       // CONSTRUCTORS //
     IEvent();

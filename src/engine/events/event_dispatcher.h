@@ -7,16 +7,19 @@
 #include <containers/dynamic_array.h>
 #include <functional>
 #include "ievent.h"
+#include <scene/itickable.h>
 #include <string>
 
 namespace StevensDev
 {
 namespace sgde
 {
-class EventDispatcher : public ITickable
+class EventDispatcher : public sgds::ITickable
 {
   private:
-    DynamicArray< std::function<void( const IEvent& )>* > listeners;
+    sgdc::DynamicArray< std::function<void( const IEvent& )>* > listeners;
+    sgdc::DynamicArray< std::function<void( const IEvent& )>* > listenersToAdd;
+    sgdc::DynamicArray< std::function<void( const IEvent& )>* > listenersToRemove;
   public:
       // CONSTRUCTORS //
     EventDispatcher();
@@ -32,6 +35,9 @@ class EventDispatcher : public ITickable
     void remove( const std::string& type, std::function<void( const IEvent& )>* listener );
     void dispatch( const IEvent& event );
       //  called as part of tick, synchronous
+    void preTick();
+    void tick( float dtS );
+    void postTick();
 };
 }
 }

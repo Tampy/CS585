@@ -12,26 +12,25 @@ IEvent::IEvent() { }
 
 IEvent::IEvent( IEvent& otherEvent )
 {
-	type = otherEvent.type();
+	eventType = otherEvent.type();
 }
 
 IEvent::~IEvent() { }
 
 IEvent& IEvent::operator=( IEvent& otherEvent )
 {
-	type = otherEvent.type();
+	eventType = otherEvent.type();
 }
 
 const std::string IEvent::type() const
 {
-	return type;
+	return eventType;
 }
 
-void setType( std::string newType )
+void IEvent::setType( std::string newType )
 {
-	type = newType;
+	eventType = newType;
 }
 
-};
 }
 }
