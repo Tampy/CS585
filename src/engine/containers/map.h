@@ -85,10 +85,26 @@ template<typename T> class Map {
                 return 0;
             }
         }
+        std::cout << table[hashValue].value << std::endl;
         return table[hashValue].value;
     }
       // No mutation
       // ACCESSORS //
+    const T &get( const std::string key )
+    {
+        int hashValue = hash( key );
+        int lookupChecks = 0;
+        while ( table[hashValue].key != key ) {
+            hashValue = ( hashValue + 1 ) % table.getMaxSize();
+            lookupChecks++;
+            if( lookupChecks > key.length() ) {
+                std::cout << "Key does not exist." << std::endl;
+                throw std::runtime_error( "Key does not exist." );
+            }
+        }
+        return table[hashValue].value;
+    }
+      // gets value based on key
     bool has( const std::string &key ) {
         int hashValue = hash( key );
         int lookupChecks = 0;

@@ -2,6 +2,7 @@
 
 #include "renderable_sprite.h"
 #include <SFML/System/Vector2.hpp>
+#include <iostream>
 
 namespace StevensDev {
 namespace sgdr {

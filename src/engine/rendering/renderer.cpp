@@ -36,7 +36,22 @@ Renderer& Renderer::operator = ( const Renderer &otherRenderer ) {
 
 void Renderer::draw() {
     window.clear( sf::Color( 0, 0, 0 ) );
+    sf::Event event;
+    while( window.pollEvent( event ) ) 
+    {
+        if( event.type == sf::Event::Closed )
+        {
+            window.close();
+            exit( 0 );
+        }
+    }
     int i;
+    window.clear();
+    /*sf::Texture texture;
+    sf::Sprite sprite;
+    texture.create( 200, 200 );
+    sprite.setTexture( texture );
+    window.draw( sprite );*/
     for( i = 0; i < d_sprites.getLength(); i++ ) {
         window.draw( d_sprites[i]->sprite() );
     }
@@ -56,16 +71,15 @@ void Renderer::setupWindow( int width, int height ) {
 }
 
 bool Renderer::loadTexture( const std::string& name, const std::string& path ) {
-    sf::Texture texture;
-    if( !texture.loadFromFile( path + name ) ) {
+    if( !textures[name].loadFromFile( path + name ) ) {
+        std::cout << "Error loading file " + name << std::endl;
         return false;
     }
-    textures[name] = texture;
     return true;
 }
 
 const sf::Texture& Renderer::getTexture( const std::string& name ) {
-    return textures[name];
+    return textures.get(name);
 }
 
 bool Renderer::isActive() {

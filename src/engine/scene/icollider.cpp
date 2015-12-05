@@ -21,7 +21,7 @@ ICollider& ICollider::operator =( const ICollider& otherCollider ) {
     colliderFlags = otherCollider.colliderFlags;
 }
 
-const RectangleBounds& ICollider::bounds() const {
+RectangleBounds& ICollider::bounds() {
     return rectBounds;
 }
 

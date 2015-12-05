@@ -23,7 +23,7 @@ class ICollider {
     ICollider &operator =( const ICollider &otherCollider );
       // assignment operator
       // ACCESSORS //
-    const RectangleBounds& bounds() const;
+    RectangleBounds& bounds();
     unsigned short flags() const;
     bool canCollide( unsigned short flags ) const;
     bool doesCollide( const RectangleBounds& candidate );

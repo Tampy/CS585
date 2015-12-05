@@ -12,6 +12,18 @@ namespace StevensDev {
 namespace sgdi {
 class Input : public sgds::ITickable {
   private:
+      // CONSTRUCTORS //
+    Input();
+      // default constructor
+    Input( Input& otherInput );
+      // copy constructor
+      // FREE OPERATORS //
+    Input& operator = ( const Input &otherInput );
+      // assignment operator
+    void tick( float dtS );
+    void postTick();
+    sf::Event event;
+  public:
     enum InputType {
         Q_KEY = sf::Keyboard::Q,
         W_KEY = sf::Keyboard::W,
@@ -50,20 +62,9 @@ class Input : public sgds::ITickable {
         MOUSE_4 = sf::Mouse::XButton1,
         MOUSE_5 = sf::Mouse::XButton2
     };
-      // CONSTRUCTORS //
-    Input();
-      // default constructor
-    Input( Input& otherInput );
-      // copy constructor
-      // FREE OPERATORS //
-    Input& operator = ( const Input &otherInput );
-      // assignment operator
+      // different types of input controls
     bool isKey( InputType type );
       // Determines if InputType is a key
-    void tick( float dtS );
-    void postTick();
-    sf::Event event;
-  public:
     ~Input();
       // destructor
       // ACCESSORS //

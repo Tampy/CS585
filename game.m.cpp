@@ -25,9 +25,11 @@ int main( int argc, char *argv[] ) {
         std::cout << "Error." << std::endl;
         return 1;
     }
-    sprite.setTexture( renderer.getTexture( "texture.png" ) );
+    sf::Texture texture = renderer.getTexture( "texture.png" );
+    sprite.setTexture( texture );
     sgds::Scene::inst().setRenderer( &renderer );
-    sprite.setPosition( spritePosX, spritePosY );
+    //sprite.setPosition( spritePosX, spritePosY );
+    renderer.addSprite( &sprite );
     while( true ) {
         sgds::Scene::inst().tick();
     }
