@@ -7,6 +7,7 @@
 #include <input/input.h>
 #include <rendering/renderable_sprite.h>
 #include <rendering/renderer.h>
+#include <scene/nxn_scene_graph.h>
 #include <scene/scene.h>
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
@@ -39,6 +40,19 @@ int main( int argc, char *argv[] ) {
     renderer.addSprite( &ai.getSprite() );
 
     sgds::Scene::inst().setRenderer( &renderer );
+
+    NxNSceneGraph sceneGraph;
+    sceneGraph.addCollider( &player.getCollider() );
+    sceneGraph.addCollider( &ai.getCollider() );
+
+    //create walls
+    sgdr::RenderableSprite wall1, wall2, wall3, wall4;
+    wall1.setBasicTexture( 255, 255, 255, 255, 400, 5 );
+    wall2.setBasicTexture( 255, 255, 255, 255, 5, 400 );
+    wall3.setBasicTexture( 255, 255, 255, 255, 5, 200 );
+    wall4.setBasicTexture( 255, 255, 255, 255, 200, 5 );
+
+    sgds::Scene::inst().addTickable( &sceneGraph );
     while( true ) {
         //std::cout << "loop" << std::endl;
         sgds::Scene::inst().tick();

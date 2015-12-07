@@ -14,6 +14,8 @@ class NxNSceneGraph : public ITickable {
     float dimensions;
     float divisions;
     sgdc::DynamicArray<ICollider*> colliders;
+    sgdc::DynamicArray<ICollider*> collidersToAdd;
+    sgdc::DynamicArray<ICollider*> collidersToRemove;
   public:
       // CONSTRUCTOR //
     NxNSceneGraph();
@@ -39,6 +41,9 @@ class NxNSceneGraph : public ITickable {
         unsigned short flags );
     sgdc::DynamicArray<ICollider*> find( const ICollider* collider );
       // Do not return self
+    void preTick();
+    void tick( float dtS );
+    void postTick();
 };
 }
 }

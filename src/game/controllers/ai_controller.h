@@ -6,6 +6,7 @@
 
 #include <ctime>
 #include <rendering/renderable_sprite.h>
+#include <scene/icollider.h>
 
 namespace StevensDev
 {
@@ -15,6 +16,7 @@ class AIController
 {
   private:
     sgdr::RenderableSprite aiSprite;
+    sgds::ICollider collider;
     std::clock_t vulnerabilityStartTime;
     bool vulnerable;
   public:

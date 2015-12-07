@@ -6,6 +6,7 @@
 
 #include <input/input.h>
 #include <rendering/renderable_sprite.h>
+#include <scene/icollider.h>
 
 namespace StevensDev
 {
@@ -15,6 +16,7 @@ class PlayerController
 {
   private:
     sgdr::RenderableSprite playerSprite;
+    sgds::ICollider collider;
   public:
       // CONSTRUCTORS //
     PlayerController();
@@ -29,11 +31,10 @@ class PlayerController
       // ACCESSORS //
     sgdr::RenderableSprite& getSprite();
       // gets sprite used by player
+    sgds::ICollider& getCollider();
       // MUTATORS //
     void updatePosition();
       // check input and update position based on input
-    void checkForCollision();
-      // if colliding, prevent position updating
 };
 }
 }

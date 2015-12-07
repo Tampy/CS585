@@ -14,6 +14,8 @@ NxNSceneGraph::NxNSceneGraph( NxNSceneGraph& otherScene ) {
     dimensions = otherScene.dimensions;
     divisions = otherScene.divisions;
     colliders = otherScene.colliders;
+    collidersToAdd = otherScene.collidersToAdd;
+    collidersToRemove = otherScene.collidersToRemove;
 }
 
 NxNSceneGraph::NxNSceneGraph( float dimensions, int divisions ) {
@@ -23,20 +25,24 @@ NxNSceneGraph::NxNSceneGraph( float dimensions, int divisions ) {
 
 NxNSceneGraph::~NxNSceneGraph() {
     colliders.~DynamicArray<ICollider*>();
+    collidersToAdd.~DynamicArray<ICollider*>();
+    collidersToRemove.~DynamicArray<ICollider*>();
 }
 
 NxNSceneGraph& NxNSceneGraph::operator =( const NxNSceneGraph& otherScene ) {
     dimensions = otherScene.dimensions;
     divisions = otherScene.divisions;
     colliders = otherScene.colliders;
+    collidersToAdd = otherScene.collidersToAdd;
+    collidersToRemove = otherScene.collidersToRemove;
 }
 
 void NxNSceneGraph::addCollider( ICollider* collider ) {
-    colliders.push( collider );
+    collidersToAdd.push( collider );
 }
 
 void NxNSceneGraph::removeCollider( ICollider* collider ) {
-    //colliders.removeByValue( collider );
+    //collidersToRemove.removeByValue( collider );
 }
 
 sgdc::DynamicArray<ICollider*> NxNSceneGraph::find( float x, float y,
@@ -97,6 +103,26 @@ sgdc::DynamicArray<ICollider*> NxNSceneGraph::find( const ICollider* collider ) 
         }
     }
     return foundColliders;
+}
+
+void NxNSceneGraph::preTick() {
+    int i;
+    for( i = 0; i < collidersToAdd.getLength(); i++ )
+    {
+        colliders.push( collidersToAdd[i] );
+    }
+    for( i = 0; i < collidersToRemove.getLength(); i++ )
+    {
+        colliders.push( collidersToRemove[i] );
+    }
+}
+
+void NxNSceneGraph::tick( float dtS ) {
+
+}
+
+void NxNSceneGraph::postTick() {
+
 }
 
 }

@@ -10,12 +10,12 @@ namespace mgc
 
 PlayerController::PlayerController()
 {
-
+    collider.bounds().setDimensions( 64, 64 );
 }
 
 PlayerController::PlayerController( PlayerController& otherController )
 {
-
+    collider.bounds().setDimensions( 64, 64 );
 }
 
 PlayerController::~PlayerController()
@@ -25,7 +25,7 @@ PlayerController::~PlayerController()
 
 PlayerController& PlayerController::operator=( PlayerController& otherController )
 {
-
+    collider.bounds().setDimensions( 64, 64 );
 }
 
 sgdr::RenderableSprite& PlayerController::getSprite() {
@@ -50,11 +50,12 @@ void PlayerController::updatePosition()
     {
         playerSprite.move( 10, 0 );
     }
+    collider.bounds().setPosition( playerSprite.getPositionX(), playerSprite.getPositionY() );
 }
 
-void PlayerController::checkForCollision()
+sgds::ICollider& AIController::getCollider()
 {
-
+    return collider;
 }
 
 }
