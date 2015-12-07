@@ -29,7 +29,7 @@ class RenderableSprite {
       // Increments x by x, y by y
     void setTexture( sf::Texture texture );
       // Sets texture of sprite
-    void setBasicTexture( int r, int g, int b, int a = 255 );
+    void setBasicTexture( int r, int g, int b, int a = 255, int x = 64, int y = 64 );
       // Sets texture not based on file and adds a color
       // ACCESSORS //
     const sf::Sprite& sprite() const;
