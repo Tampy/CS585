@@ -10,9 +10,9 @@ find_package(SFML 2 REQUIRED system window graphics network audio)
 # GTest
 enable_testing()
 find_package(Threads REQUIRED)
-file(GLOB_RECURSE SOURCES "src/engine/*.cpp")
-file(GLOB_RECURSE HEADERS "src/engine/*.h")
-include_directories(src/ext/gtest-1.7.0/include ${SFML_INCLUDE_DIR} src/engine)
+file(GLOB_RECURSE SOURCES "src/engine/*.cpp" "src/game/*.cpp")
+file(GLOB_RECURSE HEADERS "src/engine/*.h" "src/game/*.cpp")
+include_directories(src/ext/gtest-1.7.0/include ${SFML_INCLUDE_DIR} src/engine src/game)
 add_subdirectory(src/ext/gtest-1.7.0 src/ext/SFML-2.3.2)
 
 # version number

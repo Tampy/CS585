@@ -54,5 +54,13 @@ void RenderableSprite::setTexture( sf::Texture texture ) {
     dsprite.setTexture( texture );
 }
 
+void RenderableSprite::setBasicTexture( int r, int g, int b, int a )
+{
+    sf::Texture texture;
+    texture.create( 64, 64 ); 
+    dsprite.setTexture( texture );
+    dsprite.setColor( sf::Color( r, g, b, a ) );
+}
+
 }
 }

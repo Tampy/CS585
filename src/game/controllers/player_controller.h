@@ -5,6 +5,7 @@
 #define PLAYER_CONTROLLER_H
 
 #include <input/input.h>
+#include <rendering/renderable_sprite.h>
 
 namespace StevensDev
 {
@@ -13,7 +14,7 @@ namespace mgc
 class PlayerController
 {
   private:
-    sgdi::Input input;
+    sgdr::RenderableSprite playerSprite;
   public:
       // CONSTRUCTORS //
     PlayerController();
@@ -25,10 +26,13 @@ class PlayerController
       // FREE OPERATORS //
     PlayerController& operator=( PlayerController& otherController );
       // assignment operator
+      // ACCESSORS //
+    sgdr::RenderableSprite& getSprite();
+      // gets sprite used by player
       // MUTATORS //
-    void UpdatePosition();
+    void updatePosition();
       // check input and update position based on input
-    void CheckForCollision();
+    void checkForCollision();
       // if colliding, prevent position updating
 };
 }

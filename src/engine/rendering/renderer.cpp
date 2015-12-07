@@ -47,12 +47,7 @@ void Renderer::draw() {
     }
     int i;
     window.clear();
-    /*sf::Texture texture;
-    sf::Sprite sprite;
-    texture.create( 200, 200 );
-    sprite.setTexture( texture );
-    window.draw( sprite );*/
-    for( i = 0; i < d_sprites.getLength(); i++ ) {
+    for( i = 0; i < d_sprites.getLength(); i++ ) { 
         window.draw( d_sprites[i]->sprite() );
     }
     window.display();
