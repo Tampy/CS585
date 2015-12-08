@@ -74,12 +74,16 @@ int main( int argc, char *argv[] ) {
 
     sgds::Scene::inst().setRenderer( &renderer );
     sgds::Scene::inst().setSceneGraph( &sceneGraph );
+    bool keepAi = true;
     while( true ) {
         std::cout << "loop" << std::endl;
         sgds::Scene::inst().tick();
         player.updatePosition();
-        ai.moveAI( player.getSprite().getPositionX(), player.getSprite().getPositionY() );
-        ai.modifyVulnerability();
+        if( keepAi )
+        {
+            ai.modifyVulnerability();
+            keepAi = ai.moveAI( player.getSprite().getPositionX(), player.getSprite().getPositionY() );
+        }
     }
 
     return 0;

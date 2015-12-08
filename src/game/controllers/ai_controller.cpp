@@ -15,6 +15,7 @@ AIController::AIController()
 {
     collider.bounds().setPosition( aiSprite.getPositionX(), aiSprite.getPositionY() );
     collider.bounds().setDimensions( 64, 64 );
+    collider.setFlags( 2 );
     vulnerabilityStartTime = std::clock();
     vulnerable = false;
 }
@@ -23,6 +24,7 @@ AIController::AIController( AIController& otherController )
 {
     collider.bounds().setPosition( aiSprite.getPositionX(), aiSprite.getPositionY() );
     collider.bounds().setDimensions( 64, 64 );
+    collider.setFlags( 2 );
     aiSprite = otherController.aiSprite;
     vulnerabilityStartTime = std::clock();
     vulnerable = false;
@@ -47,39 +49,57 @@ AIController& AIController::operator=( AIController& otherController )
     aiSprite = otherController.aiSprite;
 }
 
-void AIController::moveAI( float characterX, float characterY )
+bool AIController::moveAI( float characterX, float characterY )
 {
     float x = 0;
     float y = 0;
     float originalX = aiSprite.getPositionX();
     float originalY = aiSprite.getPositionY();
+    bool doesCollide = ( sgds::Scene::inst().getSceneGraph().find( &collider ).getLength() != 0 );
 
-    if( sgds::Scene::inst().getSceneGraph().find( &collider ).getLength() == 0 )
+    if( !doesCollide )
     {
+        // determine x movement
+        if( originalX > characterX )
+        {
+            x = -5;
+        }
+        else if( originalX < characterX )
+        {
+            x = 5;
+        }
 
-    // determine x movement
-    if( originalX > characterX )
-    {
-        x = -5;
-    }
-    else if( originalX < characterX )
-    {
-        x = 5;
-    }
+        // determine y movement
+        if( originalY > characterY )
+        {
+            y = -5;
+        }
+        else if( originalY < characterY )
+        {
+            y = 5;
+        }
 
-    // determine y movement
-    if( originalY > characterY )
+        aiSprite.move( x, y );
+        collider.bounds().setPosition( originalX + x, originalY + y );
+        while ( sgds::Scene::inst().getSceneGraph().find( &collider ).getLength() != 0 ) {
+            aiSprite.move( -x, -y );
+            collider.bounds().setPosition( originalX - x, originalY - y );
+        }
+        return true;
+    }
+    else
     {
-        y = -5;
+        if( vulnerable )
+        {
+            if( sgds::Scene::inst().getSceneGraph().find( &collider ).at(0)->flags() == 1 )
+            {
+                aiSprite.setPosition( -100, -100 );
+                collider.bounds().setPosition( -100, -100 );
+                return false;
+            }
+        }
     }
-    else if( originalY < characterY )
-    {
-        y = 5;
-    }
-
-    aiSprite.move( x, y );
-    collider.bounds().setPosition( originalX + x, originalY + y );
-    }
+    return true;
 }
 
 void AIController::modifyVulnerability()
@@ -91,15 +111,17 @@ void AIController::modifyVulnerability()
             vulnerable = false;
             vulnerabilityStartTime = std::clock();
             aiSprite.setBasicTexture( 0, 255, 0 );
+            collider.setFlags( 2 );
         }
     }
     else
     {
-        if( ( ( std::clock() - vulnerabilityStartTime ) / (double) CLOCKS_PER_SEC ) >= .3 )
+        if( ( ( std::clock() - vulnerabilityStartTime ) / (double) CLOCKS_PER_SEC ) >= .05 )
         {
             vulnerable = true;
             vulnerabilityStartTime = std::clock();
             aiSprite.setBasicTexture( 132, 122, 255 );
+            collider.setFlags( 3 );
         }
     }
 }

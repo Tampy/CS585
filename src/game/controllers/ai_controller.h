@@ -40,7 +40,7 @@ class AIController
     bool isVulnerable();
       // check whether the AI is vulnerable in this moment or not
       // MUTATORS //
-    void moveAI( float characterX, float characterY );
+    bool moveAI( float characterX, float characterY );
       // update AI position automatically, checking for collisions
     void modifyVulnerability();
       // if colliding, prevent position updating
