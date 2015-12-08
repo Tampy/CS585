@@ -12,6 +12,10 @@
 #include <SFML/Graphics.hpp>
 #include <unistd.h>
 
+void setVariables() {
+
+}
+
 int main( int argc, char *argv[] ) {
     using namespace StevensDev;
     const int windowWidth = 800;
@@ -48,24 +52,24 @@ int main( int argc, char *argv[] ) {
     sgdr::RenderableSprite wall1, wall2, wall3, wall4, wall5;
     wall1.setBasicTexture( 255, 255, 255, 255, 400, 5 );
     wall2.setBasicTexture( 255, 255, 255, 255, 5, 400 );
-    wall3.setBasicTexture( 255, 255, 255, 255, 5, 200 );
-    wall4.setBasicTexture( 255, 255, 255, 255, 5, 200 );
-    wall5.setBasicTexture( 255, 255, 255, 255, 400, 5 );
+    //wall3.setBasicTexture( 255, 255, 255, 255, 5, 200 );
+    //wall4.setBasicTexture( 255, 255, 255, 255, 5, 200 );
+    //wall5.setBasicTexture( 255, 255, 255, 255, 400, 5 );
     wall1.setPosition( 100, 100 );
     wall2.setPosition( 100, 100 );
-    wall3.setPosition( 500, 100 );
-    wall4.setPosition( 300, 300 );
-    wall5.setPosition( 300, 500 );
+    //wall3.setPosition( 700, 300 );
+    //wall4.setPosition( 300, 300 );
+    //wall5.setPosition( 300, 500 );
     renderer.addSprite( &wall1 );
     renderer.addSprite( &wall2 );
-    renderer.addSprite( &wall3 );
-    renderer.addSprite( &wall4 );
-    renderer.addSprite( &wall5 );
+    //renderer.addSprite( &wall3 );
+    //renderer.addSprite( &wall4 );
+    //renderer.addSprite( &wall5 );
     sgds::ICollider wall1Collider( 100, 100, 400, 5 );
     sgds::ICollider wall2Collider( 100, 100, 5, 400 );
-    sgds::ICollider wall3Collider( 500, 100, 5, 200 );
-    sgds::ICollider wall4Collider( 300, 300, 5, 200 );
-    sgds::ICollider wall5Collider( 300, 500, 400, 5 );
+    //sgds::ICollider wall3Collider( 700, 300, 5, 200 );
+    //sgds::ICollider wall4Collider( 300, 300, 5, 200 );
+    //sgds::ICollider wall5Collider( 300, 500, 400, 5 );
     sceneGraph.addCollider( &wall1Collider );
     sceneGraph.addCollider( &wall2Collider );
     //sceneGraph.addCollider( &wall3Collider );
@@ -79,6 +83,10 @@ int main( int argc, char *argv[] ) {
         std::cout << "loop" << std::endl;
         sgds::Scene::inst().tick();
         player.updatePosition();
+        /* if( player.checkIfDead() )
+        {
+            break;
+        }*/
         if( keepAi )
         {
             ai.modifyVulnerability();

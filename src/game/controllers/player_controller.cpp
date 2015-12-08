@@ -74,6 +74,17 @@ void PlayerController::updatePosition()
     collider.bounds().setPosition( playerSprite.getPositionX(), playerSprite.getPositionY() );
 }
 
+bool PlayerController::checkIfDead()
+{
+    if( sgds::Scene::inst().getSceneGraph().find( &collider ).getLength() > 1 )
+    {
+        if( sgds::Scene::inst().getSceneGraph().find( &collider ).at(1)->flags() == 3 )
+            {
+                return false;
+            }
+    }
+}
+
 sgds::ICollider& PlayerController::getCollider()
 {
     return collider;

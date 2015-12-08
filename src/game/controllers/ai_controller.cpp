@@ -116,7 +116,7 @@ void AIController::modifyVulnerability()
     }
     else
     {
-        if( ( ( std::clock() - vulnerabilityStartTime ) / (double) CLOCKS_PER_SEC ) >= .05 )
+        if( ( ( std::clock() - vulnerabilityStartTime ) / (double) CLOCKS_PER_SEC ) >= .3 )
         {
             vulnerable = true;
             vulnerabilityStartTime = std::clock();

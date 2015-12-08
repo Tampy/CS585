@@ -32,6 +32,9 @@ class PlayerController
     sgdr::RenderableSprite& getSprite();
       // gets sprite used by player
     sgds::ICollider& getCollider();
+      // get collider used by player
+    bool checkIfDead();
+      // check if we have collided with AI
       // MUTATORS //
     void updatePosition();
       // check input and update position based on input
