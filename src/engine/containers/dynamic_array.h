@@ -108,7 +108,7 @@ template<typename T> class DynamicArray {
     }
       // destructor
       // FREE OPERATORS //
-    DynamicArray &operator = ( const DynamicArray &otherArray) {
+    DynamicArray &operator = ( const DynamicArray<T> &otherArray) {
         maxSize = otherArray.getMaxSize();
         array = arrayAlloc.get( maxSize );
         int i = 0;

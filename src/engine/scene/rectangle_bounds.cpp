@@ -1,6 +1,7 @@
 // rectangle_bounds.cpp
 
 #include "rectangle_bounds.h"
+#include <iostream>
 
 namespace StevensDev {
 namespace sgds {
@@ -78,13 +79,33 @@ void RectangleBounds::setPosition( float x, float y ) {
 }
 
 bool RectangleBounds::doesCollide( const RectangleBounds& candidate ) {
-    float rectBoundsX = candidate.x() + candidate.width();
-    float rectBoundsY = candidate.x() + candidate.height();
-    if( rectBoundsX > rectX && rectBoundsX < rectX + rectWidth ) {
-        if( rectBoundsY > rectY && rectBoundsY < rectY + rectHeight ) {
+    float candidateX = candidate.x();
+    float candidateY = candidate.y();
+    float candidateBoundsX = candidate.x() + candidate.width();
+    float candidateBoundsY = candidate.y() + candidate.height();
+    if( candidateX > rectX && candidateX < rectX + rectWidth )
+    {
+        if( candidateY > rectY && candidateY < rectY + rectHeight )
+        {
+            return true;
+        }
+        else if( candidateY < rectY && rectY < candidateY + candidateBoundsY )
+        {
             return true;
         }
     }
+    else if( candidateX < rectX && rectX < candidateX + candidateBoundsX )
+    {
+        if( candidateY > rectY && candidateY < rectY + rectHeight )
+        {
+            return true;
+        }
+        else if( candidateY < rectY && rectY < candidateY + candidateBoundsY )
+        {
+            return true;
+        }
+    }
+
     return false;
 }
 

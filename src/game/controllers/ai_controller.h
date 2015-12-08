@@ -35,6 +35,8 @@ class AIController
       // ACCESSORS //
     sgdr::RenderableSprite& getSprite();
       // gets sprite used by AI
+    sgds::ICollider& getCollider();
+      // gets collider used by AI
     bool isVulnerable();
       // check whether the AI is vulnerable in this moment or not
       // MUTATORS //

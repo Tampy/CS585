@@ -1,6 +1,7 @@
 // nxn_scene_graph.cpp
 
 #include "nxn_scene_graph.h"
+#include <iostream>
 
 namespace StevensDev {
 namespace sgds {
@@ -98,7 +99,7 @@ sgdc::DynamicArray<ICollider*> NxNSceneGraph::find( const ICollider* collider ) 
     int i;
     sgdc::DynamicArray<ICollider*> foundColliders;
     for( i = 0; i < colliders.getLength(); i++ ) {
-        if( colliders[i] == collider ) {
+        if( colliders[i]->doesCollide( collider->constBounds() ) ) {
             foundColliders.push( colliders[i] );
         }
     }
@@ -109,11 +110,11 @@ void NxNSceneGraph::preTick() {
     int i;
     for( i = 0; i < collidersToAdd.getLength(); i++ )
     {
-        colliders.push( collidersToAdd[i] );
+        colliders.push( collidersToAdd.pop() );
     }
     for( i = 0; i < collidersToRemove.getLength(); i++ )
     {
-        colliders.push( collidersToRemove[i] );
+        colliders.push( collidersToRemove.pop() );
     }
 }
 

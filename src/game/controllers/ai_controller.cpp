@@ -2,6 +2,9 @@
 // controls how the ghost characters move
 
 #include "ai_controller.h"
+#include <containers/dynamic_array.h>
+#include <scene/scene.h>
+#include <iostream>
 
 namespace StevensDev
 {
@@ -10,6 +13,7 @@ namespace mgc
 
 AIController::AIController()
 {
+    collider.bounds().setPosition( aiSprite.getPositionX(), aiSprite.getPositionY() );
     collider.bounds().setDimensions( 64, 64 );
     vulnerabilityStartTime = std::clock();
     vulnerable = false;
@@ -17,6 +21,7 @@ AIController::AIController()
 
 AIController::AIController( AIController& otherController )
 {
+    collider.bounds().setPosition( aiSprite.getPositionX(), aiSprite.getPositionY() );
     collider.bounds().setDimensions( 64, 64 );
     aiSprite = otherController.aiSprite;
     vulnerabilityStartTime = std::clock();
@@ -25,6 +30,7 @@ AIController::AIController( AIController& otherController )
 
 AIController::AIController( float x, float y )
 {
+    collider.bounds().setPosition( aiSprite.getPositionX(), aiSprite.getPositionY() );
     collider.bounds().setDimensions( 64, 64 );
     aiSprite.setPosition( x, y );
     vulnerabilityStartTime = std::clock();
@@ -43,10 +49,13 @@ AIController& AIController::operator=( AIController& otherController )
 
 void AIController::moveAI( float characterX, float characterY )
 {
-    float x;
-    float y;
+    float x = 0;
+    float y = 0;
     float originalX = aiSprite.getPositionX();
     float originalY = aiSprite.getPositionY();
+
+    if( sgds::Scene::inst().getSceneGraph().find( &collider ).getLength() == 0 )
+    {
 
     // determine x movement
     if( originalX > characterX )
@@ -70,6 +79,7 @@ void AIController::moveAI( float characterX, float characterY )
 
     aiSprite.move( x, y );
     collider.bounds().setPosition( originalX + x, originalY + y );
+    }
 }
 
 void AIController::modifyVulnerability()

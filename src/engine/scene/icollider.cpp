@@ -12,6 +12,12 @@ ICollider::ICollider( ICollider& otherCollider ) {
     colliderFlags = otherCollider.flags();
 }
 
+ICollider::ICollider( float x, float y, float height, float width )
+{
+    rectBounds.setPosition( x, y );
+    rectBounds.setDimensions( height, width );
+}
+
 ICollider::~ICollider() {
     rectBounds.~RectangleBounds();
 }
@@ -22,6 +28,10 @@ ICollider& ICollider::operator =( const ICollider& otherCollider ) {
 }
 
 RectangleBounds& ICollider::bounds() {
+    return rectBounds;
+}
+
+const RectangleBounds& ICollider::constBounds() const {
     return rectBounds;
 }
 

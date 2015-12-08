@@ -36,6 +36,12 @@ Scene& Scene::inst() {
     return instance;
 }
 
+sgds::NxNSceneGraph& Scene::getSceneGraph()
+{
+    return *sceneGraph;
+
+}
+
 void Scene::tick() {
     int i;
     for( i = 0; i < tickables.getLength(); i++ ) {
@@ -43,6 +49,7 @@ void Scene::tick() {
         tickables[i]->tick( tickCount );
         tickables[i]->postTick();
     }
+    sceneGraph->preTick();
     sceneRenderer->draw();
     tickCount++;
 }
@@ -52,11 +59,16 @@ void Scene::addTickable( ITickable* tickable ) {
 }
 
 void Scene::removeTickable( ITickable* tickable ) {
-    tickables.removeByValue( tickable );
+    //tickables.removeByValue( tickable );
 }
 
 void Scene::setRenderer( sgdr::Renderer* renderer ) {
     sceneRenderer = renderer;
+}
+
+void Scene::setSceneGraph( sgds::NxNSceneGraph* graph )
+{
+    sceneGraph = graph;
 }
 
 }

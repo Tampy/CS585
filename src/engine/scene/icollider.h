@@ -17,6 +17,8 @@ class ICollider {
       // default constructor
     ICollider( ICollider& otherCollider );
       // copy constructor
+    ICollider( float x, float y, float width, float height );
+      // constructor to set bound dimensions
     ~ICollider();
       // destructor
       // FREE OPERATORS //
@@ -24,6 +26,7 @@ class ICollider {
       // assignment operator
       // ACCESSORS //
     RectangleBounds& bounds();
+    const RectangleBounds& constBounds() const;
     unsigned short flags() const;
     bool canCollide( unsigned short flags ) const;
     bool doesCollide( const RectangleBounds& candidate );

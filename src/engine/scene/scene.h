@@ -4,6 +4,7 @@
 #define SCENE_H
 
 #include "itickable.h"
+#include "nxn_scene_graph.h"
 #include <rendering/renderer.h>
 
 namespace StevensDev {
@@ -19,12 +20,15 @@ class Scene {
       // assignment operator
     sgdc::DynamicArray<ITickable*> tickables;
     sgdr::Renderer* sceneRenderer;
+    sgds::NxNSceneGraph* sceneGraph;
     float tickCount;
   public:
     ~Scene();
       // destructor
     static Scene& inst();
       // get instance of Scene
+    sgds::NxNSceneGraph& getSceneGraph();
+      // get scene's NxNSceneGraph
     void tick();
       // Progress time forward one unit.
     void addTickable( ITickable* tickable );
@@ -33,6 +37,8 @@ class Scene {
       // Remove ITickable object
     void setRenderer( sgdr::Renderer* renderer );
       // Set Renderer object
+    void setSceneGraph( sgds::NxNSceneGraph* graph );
+      // Set NxNSceneGraph object
 };
 }
 }
